@@ -10,6 +10,7 @@ abstract class AbstractClass {
 
 class Child extends AbstractClass {
 
+    // this method get overriden
     void print2() {
         System.out.println("In print2 method");
     }
