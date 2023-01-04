@@ -1,4 +1,4 @@
-class Pgm2 {
+class StaticVariables {
     
     //These are static variables
     static int roll_no = 2201112;
@@ -9,7 +9,7 @@ class Pgm2 {
         //To access static variable in main method we don't have create any object of class
         //we can access these variable via classname only
         //staic varible will have only 1 memory allocations for all the objects
-        System.out.println(Pgm2.roll_no+" "+Pgm2.name);    
+        System.out.println(StaticVariables.roll_no+" "+StaticVariables.name);    
 
     }
 

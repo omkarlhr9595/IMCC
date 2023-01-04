@@ -1,4 +1,4 @@
-class Pgm1{
+class InstanceVariables{
 
     //These are instace variables declared within class but outside method
     int roll_no = 2201112;
@@ -6,7 +6,7 @@ class Pgm1{
 
     public static void main(String[] args) {
 
-        Pgm1 obj = new Pgm1();
+        InstanceVariables obj = new InstanceVariables();
 
         //To access instace variable in main method we have to create an object of class
         System.out.println(obj.roll_no+" "+obj.name);
