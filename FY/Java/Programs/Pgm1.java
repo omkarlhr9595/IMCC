@@ -13,3 +13,10 @@ class Pgm1{
 
     }
 }
+
+
+/*
+ * Output :
+ * 2201112 Omkar Lohar
+ * 
+ */
