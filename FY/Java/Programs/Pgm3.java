@@ -20,7 +20,7 @@ class ConstructorClass {
         new ConstructorClass(); 
 
         //Parameterized Constructor will be called of same signature
-        new ConstructorClass(22011112,"Omkar");
+        new ConstructorClass(2201112,"Omkar");
     }
 
 }
@@ -29,6 +29,6 @@ class ConstructorClass {
  * Output :
  * 0 args Constructor got called
  * Parameterized Constructor got called
- * 22011112 Omkar
+ * 2201112 Omkar
  * 
  */
