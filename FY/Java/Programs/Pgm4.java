@@ -12,6 +12,20 @@ class ThisKeyword {
         System.out.println("Instance variable " + this.var1 + " " + this.var2);
     }
 
+    /*
+     * this keyword can also be used to call another in a constructor
+     */
+
+    // 0 args constructor
+    ThisKeyword() {
+        this(10, 20);
+    }
+
+    // paramaterized constructor
+    ThisKeyword(int a, int b) {
+        System.out.println("constructor called by this keyword");
+    }
+
     public static void main(String[] args) {
         new ThisKeyword().print(100, 200);
     }
@@ -20,6 +34,7 @@ class ThisKeyword {
 
 /*
  * Output :
+ * constructor called by this keyword
  * Local variable 100 200
  * Instance variable 10 20
  * 
