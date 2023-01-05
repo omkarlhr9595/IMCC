@@ -9,7 +9,8 @@
 | 5      | Nested Classes in Java    | [Pgm5.java](Pgm5.java) |
 | 6      | Abstract Classes in Java  | [Pgm6.java](Pgm6.java) |
 
-# Index of Polymorphism
+---
+## Index of Polymorphism
 
 | Sr no. | Compile time/Early Binding/Static Binding | File Name              |
 | ------ | ----------------------------------------- | ---------------------- |
@@ -20,3 +21,5 @@
 | Sr no. | Run time/Late Binding/Dynamic Binding | File Name                |
 | ------ | ------------------------------------- | ------------------------ |
 | 1      | first program                         | [pgm10.java](pgm10.java) |
+
+---
