@@ -8,3 +8,15 @@
 | 4      | this keyword in Java      | [Pgm4.java](Pgm4.java) |
 | 5      | Nested Classes in Java    | [Pgm5.java](Pgm5.java) |
 | 6      | Abstract Classes in Java  | [Pgm6.java](Pgm6.java) |
+
+# Index of Polymorphism
+
+| Sr no. | Compile time/Early Binding/Static Binding | File Name              |
+| ------ | ----------------------------------------- | ---------------------- |
+| 1      | Method Overloading                        | [Pgm7.java](Pgm6.java) |
+| 2      | Constructor Overloading                   | [Pgm8.java](Pgm6.java) |
+| 3      | Operator Overloading                      | [Pgm9.java](Pgm6.java) |
+
+| Sr no. | Run time/Late Binding/Dynamic Binding | File Name                |
+| ------ | ------------------------------------- | ------------------------ |
+| 1      | first program                         | [pgm10.java](pgm10.java) |
