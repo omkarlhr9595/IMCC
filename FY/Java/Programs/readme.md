@@ -21,6 +21,6 @@
 
 | Sr no. | Run time/Late Binding/Dynamic Binding | File Name                |
 | ------ | ------------------------------------- | ------------------------ |
-| 1      | first program                         | [pgm10.java](pgm10.java) |
+| 1      | Object Typecasting                    | [pgm10.java](pgm10.java) |
 
 ---
