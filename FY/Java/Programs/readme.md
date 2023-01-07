@@ -10,13 +10,14 @@
 | 6      | Abstract Classes in Java  | [Pgm6.java](Pgm6.java) |
 
 ---
+
 ## Index of Polymorphism
 
 | Sr no. | Compile time/Early Binding/Static Binding | File Name              |
 | ------ | ----------------------------------------- | ---------------------- |
-| 1      | Method Overloading                        | [Pgm7.java](Pgm6.java) |
-| 2      | Constructor Overloading                   | [Pgm8.java](Pgm6.java) |
-| 3      | Operator Overloading                      | [Pgm9.java](Pgm6.java) |
+| 1      | Method Overloading                        | [Pgm7.java](Pgm7.java) |
+| 2      | Constructor Overloading                   | [Pgm8.java](Pgm8.java) |
+| 3      | Operator Overloading                      | [Pgm9.java](Pgm9.java) |
 
 | Sr no. | Run time/Late Binding/Dynamic Binding | File Name                |
 | ------ | ------------------------------------- | ------------------------ |

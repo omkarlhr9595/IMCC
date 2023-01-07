@@ -23,3 +23,10 @@ class Child extends AbstractClass {
     }
 
 }
+
+/*
+ * Output :
+ * In print1 method
+ * In print2 method
+ * 
+ */
