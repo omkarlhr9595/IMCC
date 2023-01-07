@@ -23,6 +23,8 @@
 | ------ | ------------------------------------- | ------------------------ |
 | 1      | Object Typecasting                    | [pgm10.java](pgm10.java) |
 
+---
+
 ## Index of Interface
 
 | Sr no. | Program Name     | File Name                |
