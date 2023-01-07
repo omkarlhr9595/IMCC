@@ -1,13 +1,11 @@
 class MethodOverloading {
 
     // Addition function with 2 parameter
-
     int add(int num1, int num2) {
         return num1 + num2;
     }
 
     // Addition function with 3 parameter
-
     int add(int num1, int num2, int num3) {
         return num1 + num2 + num3;
     }
