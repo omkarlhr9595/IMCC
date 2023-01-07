@@ -1,6 +1,5 @@
 # Algorithm for creating Linked List
 
-<font size="5">
 ```
 STEP 1 : initialize head = null
 STEP 2 : if head == null then assign new node to head ( creating first node)
