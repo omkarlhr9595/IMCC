@@ -1,4 +1,4 @@
-#Algorithm for creating Linked List
+# Algorithm for creating Linked List
 
 ```
 STEP 1 : Initialize head = Null
