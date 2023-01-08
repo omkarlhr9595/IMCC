@@ -11,7 +11,7 @@ interface If2 {
 }
 
 // This class implements 2 interfaces
-class Interfaces implements If1, If2 {
+class Interfaces<Integer> implements If1, If2 {
 
     public void print() {
 
