@@ -27,4 +27,4 @@
 | 23      | Maximum subarray                                          | [Algorithm 23](/FY/PleaseContribute.md)                                    |
 | 24      | Recurrsive Staircase                                      | [Algorithm 24](/FY/PleaseContribute.md)                                    |
 | 25      | Rain water tarrace                                        | [Algorithm 25](/FY/PleaseContribute.md)                                    |
-| 26      | Traveling Salesman                                        | [Algorithm 25](/FY/PleaseContribute.md)                                    |
+| 26      | Traveling Salesman                                        | [Algorithm 26](/FY/PleaseContribute.md)                                    |

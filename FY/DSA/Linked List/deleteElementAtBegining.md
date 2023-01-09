@@ -7,7 +7,9 @@ STEP 3 : Make the second node's previous pointer point to NULL
 STEP 4 : Free the memory occupied by the node to be deleted
 STEP 5 : Decrement the size of the linked list by one.
 ```
+---
 
+Another approach
 # Deleting from Beginning of the list
 
 We can use the following steps to delete a node from beginning of the single linked list...
