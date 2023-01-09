@@ -1,4 +1,4 @@
-# Inserting element at any position of Linked List
+# Inserting element at any position of Doubly Linked List
 
 ```
 STEP 1 : Create newNode for given value

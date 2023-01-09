@@ -1,9 +1,11 @@
-# Algorithm for creating Linked List
+# Algorithm for creating Doubly Linked List
 
 ```
-STEP 1 : initialize head = null
-STEP 2 : if head == null then assign new node to head ( creating first node)
-STEP 3 : else assign curr = head
-STEP 4 : traverse link list through curr object till curr->next != Null And increment curr = curr->next;
-STEP 5 : create newnode (tmp) ; Assign curr ->next = newnode
+STEP 1 : Initialize the head pointer to NULL.
+STEP 2 : Allocate memory for a new node.
+STEP 3 : Set the data field of the new node.
+STEP 4 : Point the "prev" field of the new node to the current pointer of the linked list.
+STEP 5 : Point the "next" field of the new node to NULL.
+STEP 6 : Set the current pointer of the linked list to the new node.
+STEP 7 : Repeat steps 2-6 until all the desired nodes have been added.
 ```

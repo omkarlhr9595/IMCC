@@ -1,4 +1,4 @@
-# Here is an algorithm to delete an element at any position in a linked list:
+# Here is an algorithm to delete an element at any position in a doubly linked list:
 
 ```
 STEP 1 : Start traversing the linked list from the head node.

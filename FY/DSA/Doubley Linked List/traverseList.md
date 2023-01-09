@@ -1,4 +1,4 @@
-# Here is an algorithm to traverse a linked list:
+# Here is an algorithm to traverse a doubly linked list:
 
 ```
 STEP 1: Initialize a pointer to the head node of the linked list.

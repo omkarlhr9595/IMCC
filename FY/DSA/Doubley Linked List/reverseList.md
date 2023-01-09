@@ -1,4 +1,4 @@
-# Here is an algorithm to reverse a linked list:
+# Here is an algorithm to reverse a doubly linked list:
 
 ```
 STEP 1 : Initialize three pointers prev, curr and next to NULL.

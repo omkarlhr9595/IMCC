@@ -1,4 +1,4 @@
-# Here is an algorithm to delete an element at the end of a linked list:
+# Here is an algorithm to delete an element at the end of a doubly linked list:
 
 ```
 STEP 1 : Start traversing the linked list from the last node

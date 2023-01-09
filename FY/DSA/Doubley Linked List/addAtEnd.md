@@ -1,4 +1,4 @@
-# Here is an algorithm to add an element at the end of a linked list:
+# Here is an algorithm to add an element at the end of a doubly linked list:
 
 ```
 STEP 1 : Create a new node with the data to be inserted
