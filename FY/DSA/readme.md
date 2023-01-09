@@ -23,8 +23,8 @@
 | 19      | Create Stack                                              | [Algorithm 19](/FY/PleaseContribute.md)                                    |
 | 20      | Create Queue                                              | [Algorithm 20](/FY/PleaseContribute.md)                                    |
 | 21      | Circular Linked List                                      | [Algorithm 21](/FY/PleaseContribute.md)                                    |
-| 22      | Linear Search                                             | [Algorithm 22](/FY/PleaseContribute.md)                                    |
-| 23      | Maximum subarray                                          | [Algorithm 23](/FY/PleaseContribute.md)                                    |
-| 24      | Recurrsive Staircase                                      | [Algorithm 24](/FY/PleaseContribute.md)                                    |
+| 22      | Linear Search                                             | [Algorithm 22](/FY/DSA/Linear%20Search/linearSearch.md)                    |
+| 23      | Maximum subarray                                          | [Algorithm 23](/FY/DSA/Maximum%20Subarray/maxSumSubarray.md)               |
+| 24      | Recurrsive Staircase                                      | [Algorithm 24](/FY/DSA/Recurrsive%20Staircase/reccursiveStaiecase.md)      |
 | 25      | Rain water tarrace                                        | [Algorithm 25](/FY/PleaseContribute.md)                                    |
 | 26      | Traveling Salesman                                        | [Algorithm 26](/FY/PleaseContribute.md)                                    |
