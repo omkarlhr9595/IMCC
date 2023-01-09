@@ -1,4 +1,4 @@
-![img](https://www.scrolldroll.com/wp-content/uploads/2021/09/sorry-sorry-rahul-gandhi-meme-template.jpg)
+![img](https://www.scrolldroll.com/wp-content/uploads/2021/09/sorry-sorry-rahul-gandhi-meme-template.jpg|500)
 
 <marquee><h1>स्वागत स्वागत स्वागत</h1></marquee>
 
