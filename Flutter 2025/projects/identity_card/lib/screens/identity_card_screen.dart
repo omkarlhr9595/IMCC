@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class IdentityCardScreen extends StatefulWidget {
   const IdentityCardScreen({super.key});
@@ -8,6 +9,16 @@ class IdentityCardScreen extends StatefulWidget {
 }
 
 class _IdentityCardScreenState extends State<IdentityCardScreen> {
+  final name = "Harry Potter";
+  final title = "Wizard";
+  final idNumber = "1234567890";
+  final dateOfBirth = "1990-01-01";
+  final address = "9 4/5 Diagon Alley, London, England";
+  final phoneNumber = "+1234567890";
+  final email = "harry@potter.com";
+  final nationality = "British";
+  final gender = "Male";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +61,46 @@ class _IdentityCardScreenState extends State<IdentityCardScreen> {
                     fit: BoxFit.cover,
                   ),
                   borderRadius: BorderRadius.circular(1000),
+                  border: Border.all(color: Color(0xFF2E9DA6), width: 10),
+                ),
+              ),
+              SizedBox(height: 20),
+              Text(
+                name,
+                style: GoogleFonts.sacramento(
+                  fontSize: 50,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 10),
+              Text(
+                title,
+                style: GoogleFonts.sahitya(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 10),
+              RichText(
+                text: TextSpan(
+                  style: GoogleFonts.sahitya(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: "ID NO        ",
+                      style: TextStyle(
+                        color: Color(0xFF2E9DA6),
+                      ),
+                    ),
+                    TextSpan(
+                      text: ": $idNumber",
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ],
