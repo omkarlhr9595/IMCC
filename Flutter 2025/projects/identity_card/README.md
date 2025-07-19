@@ -1,3 +1,1 @@
-# identity_card
-
-A new Flutter project.
+link of design - https://www.figma.com/community/file/1184116437579248280
