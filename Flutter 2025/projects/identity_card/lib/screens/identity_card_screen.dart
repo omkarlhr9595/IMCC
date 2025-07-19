@@ -13,7 +13,7 @@ class _IdentityCardScreenState extends State<IdentityCardScreen> {
   final title = "Wizard";
   final idNumber = "1234567890";
   final dateOfBirth = "1990-01-01";
-  final address = "9 4/5 Diagon Alley, London, England";
+  final address = "England";
   final phoneNumber = "+1234567890";
   final email = "harry@potter.com";
   final nationality = "British";
@@ -89,13 +89,128 @@ class _IdentityCardScreenState extends State<IdentityCardScreen> {
                   ),
                   children: [
                     TextSpan(
-                      text: "ID NO        ",
+                      text: "ID NO ",
                       style: TextStyle(
                         color: Color(0xFF2E9DA6),
                       ),
                     ),
                     TextSpan(
                       text: ": $idNumber",
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 10),
+              RichText(
+                text: TextSpan(
+                  style: GoogleFonts.sahitya(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: "DOB ",
+                      style: TextStyle(
+                        color: Color(0xFF2E9DA6),
+                      ),
+                    ),
+                    TextSpan(
+                      text: ": $dateOfBirth",
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 10),
+              RichText(
+                text: TextSpan(
+                  style: GoogleFonts.sahitya(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: "Address ",
+                      style: TextStyle(
+                        color: Color(0xFF2E9DA6),
+                      ),
+                    ),
+                    TextSpan(
+                      text: ": $address",
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 10),
+              RichText(
+                text: TextSpan(
+                  style: GoogleFonts.sahitya(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: "Phone No",
+                      style: TextStyle(
+                        color: Color(0xFF2E9DA6),
+                      ),
+                    ),
+                    TextSpan(
+                      text: ": $phoneNumber",
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 10),
+              RichText(
+                text: TextSpan(
+                  style: GoogleFonts.sahitya(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: "Email ",
+                      style: TextStyle(
+                        color: Color(0xFF2E9DA6),
+                      ),
+                    ),
+                    TextSpan(
+                      text: ": $email",
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 10),
+              RichText(
+                text: TextSpan(
+                  style: GoogleFonts.sahitya(
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: "Nationality",
+                      style: TextStyle(
+                        color: Color(0xFF2E9DA6),
+                      ),
+                    ),
+                    TextSpan(
+                      text: ": $nationality",
                       style: TextStyle(
                         color: Colors.black,
                       ),
