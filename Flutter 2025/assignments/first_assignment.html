@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flutter Assignment Visual Examples</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+            font-size: 2.8em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #fff, #f0f8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes titleGlow {
+            from { filter: drop-shadow(0 0 10px rgba(255,255,255,0.3)); }
+            to { filter: drop-shadow(0 0 20px rgba(255,255,255,0.6)); }
+        }
+        
+        .assignment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .assignment-card {
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 3px solid #e3f2fd;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .assignment-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .assignment-card:hover::before {
+            left: 100%;
+        }
+        
+        .assignment-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+            border-color: #667eea;
+        }
+        
+        .assignment-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            padding: 10px 0;
+            position: relative;
+        }
+        
+        .assignment-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+        
+        /* Assignment 1 - Student ID Card */
+        .id-card {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            border-radius: 15px;
+            padding: 25px;
+            width: 300px;
+            margin: 0 auto;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .id-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+        
+        .id-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .id-content {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .student-photo {
+            width: 75px;
+            height: 90px;
+            background: linear-gradient(135deg, #ffffff, #f8f9fa);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 45px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 2px solid rgba(255,255,255,0.3);
+            transition: transform 0.3s ease;
+        }
+        
+        .student-photo:hover {
+            transform: scale(1.05);
+        }
+        
+        .student-info h3 {
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .student-info p {
+            font-size: 12px;
+            opacity: 0.9;
+            margin: 3px 0;
+        }
+        
+        .validity-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            display: inline-block;
+            margin-top: 8px;
+        }
+        
+        /* Assignment 2 - Profile */
+        .profile-card {
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .profile-pic {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            color: white;
+            box-shadow: 0 8px 25px rgba(255, 154, 158, 0.4);
+            border: 4px solid rgba(255,255,255,0.8);
+            transition: all 0.3s ease;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .profile-pic:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 35px rgba(255, 154, 158, 0.6);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .profile-name {
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .profile-bio {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        
+        .profile-stats {
+            display: flex;
+            justify-content: space-around;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        /* Assignment 3 - Food Menu */
+        .food-card {
+            border-radius: 12px;
+            overflow: hidden;
+            background: white;
+            border: 2px solid #ffebee;
+        }
+        
+        .food-image {
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(45deg, #ff6b6b, #ffa726);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 30px;
+        }
+        
+        .food-info {
+            padding: 15px;
+        }
+        
+        .food-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .food-desc {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+            line-height: 1.3;
+        }
+        
+        .food-price {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+        
+        /* Assignment 4 - Weather */
+        .weather-card {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(116, 185, 255, 0.4);
+            border: 2px solid rgba(255,255,255,0.4);
+        }
+        
+        .weather-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: weatherFloat 6s ease-in-out infinite;
+        }
+        
+        @keyframes weatherFloat {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(10px, -10px) rotate(1deg); }
+            50% { transform: translate(-5px, 5px) rotate(-1deg); }
+            75% { transform: translate(-10px, -5px) rotate(0.5deg); }
+        }
+        
+        .weather-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            animation: weatherBounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes weatherBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .temperature {
+            font-size: 48px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .location {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+        
+        .weather-desc {
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .temp-range {
+            display: flex;
+            justify-content: space-between;
+            font-size: 16px;
+        }
+        
+        /* Assignment 5 - Product */
+        .product-card {
+            border-radius: 12px;
+            overflow: hidden;
+            background: white;
+            border: 2px solid #f3e5f5;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 140px;
+            background: linear-gradient(45deg, #a29bfe, #6c5ce7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 35px;
+        }
+        
+        .product-info {
+            padding: 15px;
+        }
+        
+        .product-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .product-brand {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .product-price {
+            font-size: 22px;
+            font-weight: bold;
+            color: #00b894;
+        }
+        
+        /* Assignment 6 - News */
+        .news-card {
+            display: flex;
+            gap: 15px;
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            border: 2px solid #fce4ec;
+        }
+        
+        .news-image {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #fd79a8, #e84393);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 25px;
+            flex-shrink: 0;
+        }
+        
+        .news-content {
+            flex: 1;
+        }
+        
+        .news-headline {
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+        
+        .news-desc {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .news-meta {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        /* Assignment 7 - Social Media */
+        .social-post {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            border: 2px solid #e8f5e8;
+        }
+        
+        .post-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .user-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ffecd2, #fcb69f);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            margin-right: 12px;
+        }
+        
+        .user-info h4 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 3px;
+        }
+        
+        .post-time {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .post-content {
+            color: #333;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        .post-image {
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(45deg, #a8edea, #fed6e3);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 30px;
+            margin-bottom: 15px;
+        }
+        
+        .post-actions {
+            display: flex;
+            gap: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Assignment 8 - Music Album */
+        .album-card {
+            text-align: center;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            border: 2px solid #fff3e0;
+        }
+        
+        .album-cover {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 10px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 40px;
+        }
+        
+        .album-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .artist-name {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .album-year {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 5px;
+        }
+        
+        .track-count {
+            font-size: 14px;
+            color: #999;
+        }
+        
+        /* Assignment 9 - Contact */
+        .contact-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid #e0f2f1;
+        }
+        
+        .contact-photo {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff9a56, #ff6b88);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 35px;
+        }
+        
+        .contact-name {
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info {
+            text-align: left;
+            space-y: 10px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 12px;
+            color: #666;
+        }
+        
+        .contact-item span:first-child {
+            margin-right: 10px;
+            color: #667eea;
+            width: 20px;
+        }
+        
+        /* Assignment 10 - About Page */
+        .about-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: center;
+            border: 2px solid #e8eaf6;
+        }
+        
+        .app-logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 20px;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 35px;
+        }
+        
+        .app-name {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .app-version {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 20px;
+        }
+        
+        .app-description {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        
+        .developer-info {
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+            text-align: left;
+        }
+        
+        .developer-info h4 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .contact-list {
+            list-style: none;
+        }
+        
+        .contact-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+            color: #666;
+        }
+        
+        .contact-list li span:first-child {
+            margin-right: 10px;
+            color: #667eea;
+        }
+        
+        /* Google Fonts Recommendations */
+        .fonts-section {
+            background: rgba(255,255,255,0.15);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 40px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        
+        .font-card {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        
+        .font-title {
+            color: #ffd700;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+        
+        .font-recommendation {
+            color: white;
+            margin-bottom: 8px;
+            padding: 8px 12px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            border-left: 3px solid #ffd700;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Flutter Assignment Visual Examples</h1>
+        
+        <div class="assignment-grid">
+            <!-- Assignment 1: Student ID Card -->
+            <div class="assignment-card">
+                <div class="assignment-title">Assignment 1: Student ID Card</div>
+                <div class="id-card">
+                    <div class="id-header">
+                        <span style="margin-right: 8px;">🎓</span>
+                        <span style="font-weight: bold;">Tech University</span>
+                    </div>
+                    <div class="id-content">
+                        <div class="student-photo">👤</div>
+                        <div class="student-info">
+                            <h3>John Smith</h3>
+                            <p>ID: 2024CS001</p>
+                            <p style="margin: 8px 0; font-size: 14px; font-weight: 500;">Computer Science</p>
+                            <p>Batch: 2024-2028</p>
+                            <div class="validity-badge">Valid until 2028</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Assignment 2: Profile -->
+            <div class="assignment-card">
+                <div class="assignment-title">Assignment 2: Personal Profile</div>
+                <div class="profile-card">
+                    <div class="profile-pic">👩</div>
+                    <div class="profile-name">Sarah Johnson</div>
+                    <div class="profile-bio">Flutter developer passionate about creating beautiful mobile experiences</div>
+                    <div class="profile-stats">
+                        <div class="stat-item">
+                            <div class="stat-number">1.2K</div>
+                            <div class="stat-label">Followers</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">856</div>
+                            <div class="stat-label">Following</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number">42</div>
+                            <div class="stat-label">Posts</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Assignment 3: Food Menu -->
+            <div class="assignment-card">
+                <div class="assignment-title">Assignment 3: Food Menu Item</div>
+                <div class="food-card">
+                    <div class="food-image">🍕</div>
+                    <div class="food-info">
+                        <div class="food-name">Margherita Pizza</div>
+                        <div class="food-desc">Fresh tomatoes, mozzarella cheese, basil leaves on crispy thin crust</div>
+                        <div class="food-price">$12.99</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Assignment 4: Weather -->
+            <div class="assignment-card">
+                <div class="assignment-title">Assignment 4: Weather Display</div>
+                <div class="weather-card">
+                    <div class="weather-icon">☀️</div>
+                    <div class="temperature">24°</div>
+                    <div class="location">New York</div>
+                    <div class="weather-desc">Sunny</div>
+                    <div class="temp-range">
+                        <span>High: 28°</span>
+                        <span>Low: 18°</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Assignment 5: Product -->
+            <div class="assignment-card">
+                <div class="assignment-title">Assignment 5: Product Showcase</div>
+                <div class="product-card">
+                    <div class="product-image">👟</div>
+                    <div class="product-info">
+                        <div class="product-title">Running Shoes Pro</div>
+                        <div class="product-brand">Nike</div>
+                        <div class="product-price">$89.99</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Assignment 6: News -->
+            <div class="assignment-card">
+                <div class="assignment-title">Assignment 6: News Article Preview</div>
+                <div class="news-card">
+                    <div class="news-image">📰</div>
+                    <div class="news-content">
+                        <div class="news-headline">Flutter 4.0 Released with Amazing Features</div>
+                        <div class="news-desc">Google announces the latest version of Flutter with improved performance...</div>
+                        <div class="news-meta">TechNews • 2 hours ago</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Assignment 7: Social Media -->
+            <div class="assignment-card">
+                <div class="assignment-title">Assignment 7: Social Media Post</div>
+                <div class="social-post">
+                    <div class="post-header">
+                        <div class="user-avatar">👨</div>
+                        <div class="user-info">
+                            <h4>Mike Chen</h4>
+                            <div class="post-time">2 hours ago</div>
+                        </div>
+                    </div>
+                    <div class="post-content">
+                        Just finished building my first Flutter app! The widgets system is incredible 🚀
+                    </div>
+                    <div class="post-image">📱</div>
+                    <div class="post-actions">
+                        <span>❤️ 24 likes</span>
+                        <span>💬 8 comments</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Assignment 8: Music Album -->
+            <div class="assignment-card">
+                <div class="assignment-title">Assignment 8: Music Album Display</div>
+                <div class="album-card">
+                    <div class="album-cover">🎵</div>
+                    <div class="album-title">Night Vibes</div>
+                    <div class="artist-name">The Midnight</div>
+                    <div class="album-year">2024</div>
+                    <div class="track-count">12 tracks</div>
+                </div>
+            </div>
+            
+            <!-- Assignment 9: Contact -->
+            <div class="assignment-card">
+                <div class="assignment-title">Assignment 9: Contact Card</div>
+                <div class="contact-card">
+                    <div class="contact-photo">👨‍💼</div>
+                    <div class="contact-name">David Wilson</div>
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <span>📞</span>
+                            <span>+1 (555) 123-4567</span>
+                        </div>
+                        <div class="contact-item">
+                            <span>📧</span>
+                            <span>david.wilson@email.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <span>📍</span>
+                            <span>123 Main St, City, State</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Assignment 10: About Page -->
+            <div class="assignment-card">
+                <div class="assignment-title">Assignment 10: App About Page</div>
+                <div class="about-card">
+                    <div class="app-logo">📱</div>
+                    <div class="app-name">MyFlutterApp</div>
+                    <div class="app-version">Version 1.0.0</div>
+                    <div class="app-description">
+                        A beautiful mobile application built with Flutter. This app demonstrates clean UI design and smooth user experience with modern Material Design principles.
+                    </div>
+                    <div class="developer-info">
+                        <h4>Developer Information</h4>
+                        <ul class="contact-list">
+                            <li><span>🏢</span> ABC Tech Solutions</li>
+                            <li><span>📧</span> support@abctech.com</li>
+                            <li><span>🌐</span> www.abctech.com</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: rgba(255,255,255,0.15); border-radius: 20px; padding: 30px; margin-top: 40px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+            <h2 style="color: white; text-align: center; margin-bottom: 20px; font-size: 2em; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">📚 Instructions for Students</h2>
+            <div style="color: white; line-height: 1.8; font-size: 1.1em;">
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2);">
+                        <h3 style="margin-bottom: 10px; color: #ffd700;">🎯 Your Goal</h3>
+                        <p>Recreate these designs using only Container, Row, Column, Text, Image, Icon, and SizedBox widgets.</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2);">
+                        <h3 style="margin-bottom: 10px; color: #ffd700;">📱 Focus Areas</h3>
+                        <p>Proper spacing, text hierarchy, color usage, and clean layouts.</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2);">
+                        <h3 style="margin-bottom: 10px; color: #ffd700;">🎨 Remember</h3>
+                        <p>Use Container for styling, Row/Column for layout, and SizedBox for spacing.</p>
+                    </div>
+                    <div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2);">
+                        <h3 style="margin-bottom: 10px; color: #ffd700;">🖼️ Images</h3>
+                        <p>Use Image.network() with placeholder URLs or Image.asset() for local images.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Google Fonts Recommendations Section -->
+        <div class="fonts-section">
+            <h2 style="color: white; text-align: center; margin-bottom: 30px; font-size: 2em; text-shadow: 2px 2px 4px rgba(0,0,0,0.3);">🎨 Google Fonts Recommendations</h2>
+            
+            <div class="font-card">
+                <div class="font-title">Assignment 1: Student ID Card</div>
+                <div class="font-recommendation">📝 Headers: GoogleFonts.poppins(fontWeight: FontWeight.bold)</div>
+                <div class="font-recommendation">📄 Body Text: GoogleFonts.inter(fontWeight: FontWeight.w400)</div>
+                <div class="font-recommendation">🏷️ Labels: GoogleFonts.roboto(fontWeight: FontWeight.w500)</div>
+            </div>
+            
+            <div class="font-card">
+                <div class="font-title">Assignment 2: Personal Profile</div>
+                <div class="font-recommendation">👤 Name: GoogleFonts.montserrat(fontWeight: FontWeight.bold)</div>
+                <div class="font-recommendation">📖 Bio: GoogleFonts.openSans(fontWeight: FontWeight.w400)</div>
+                <div class="font-recommendation">📊 Stats: GoogleFonts.roboto(fontWeight: FontWeight.w500)</div>
+            </div>
+            
+            <div class="font-card">
+                <div class="font-title">Assignment 3: Food Menu Item</div>
+                <div class="font-recommendation">🍕 Food Name: GoogleFonts.playfairDisplay(fontWeight: FontWeight.bold)</div>
+                <div class="font-recommendation">📝 Description: GoogleFonts.lato(fontWeight: FontWeight.w400)</div>
+                <div class="font-recommendation">💰 Price: GoogleFonts.roboto(fontWeight: FontWeight.bold)</div>
+            </div>
+            
+            <div class="font-card">
+                <div class="font-title">Assignment 4: Weather Display</div>
+                <div class="font-recommendation">🌡️ Temperature: GoogleFonts.raleway(fontWeight: FontWeight.bold)</div>
+                <div class="font-recommendation">📍 Location: GoogleFonts.roboto(fontWeight: FontWeight.w500)</div>
+                <div class="font-recommendation">☀️ Description: GoogleFonts.openSans(fontWeight: FontWeight.w400)</div>
+            </div>
+            
+            <div class="font-card">
+                <div class="font-title">Assignment 5: Product Showcase</div>
+                <div class="font-recommendation">👟 Product Name: GoogleFonts.poppins(fontWeight: FontWeight.bold)</div>
+                <div class="font-recommendation">🏷️ Brand: GoogleFonts.roboto(fontWeight: FontWeight.w500)</div>
+                <div class="font-recommendation">💰 Price: GoogleFonts.montserrat(fontWeight: FontWeight.bold)</div>
+            </div>
+            
+            <div class="font-card">
+                <div class="font-title">Assignment 6: News Article Preview</div>
+                <div class="font-recommendation">📰 Headline: GoogleFonts.merriweather(fontWeight: FontWeight.bold)</div>
+                <div class="font-recommendation">📖 Description: GoogleFonts.sourceSansPro(fontWeight: FontWeight.w400)</div>
+                <div class="font-recommendation">⏰ Meta: GoogleFonts.roboto(fontWeight: FontWeight.w300)</div>
+            </div>
+            
+            <div class="font-card">
+                <div class="font-title">Assignment 7: Social Media Post</div>
+                <div class="font-recommendation">👤 Username: GoogleFonts.poppins(fontWeight: FontWeight.w600)</div>
+                <div class="font-recommendation">📝 Post Content: GoogleFonts.inter(fontWeight: FontWeight.w400)</div>
+                <div class="font-recommendation">⏰ Time: GoogleFonts.roboto(fontWeight: FontWeight.w300)</div>
+            </div>
+            
+            <div class="font-card">
+                <div class="font-title">Assignment 8: Music Album Display</div>
+                <div class="font-recommendation">🎵 Album Title: GoogleFonts.playfairDisplay(fontWeight: FontWeight.bold)</div>
+                <div class="font-recommendation">🎤 Artist: GoogleFonts.roboto(fontWeight: FontWeight.w500)</div>
+                <div class="font-recommendation">📅 Year/Tracks: GoogleFonts.openSans(fontWeight: FontWeight.w400)</div>
+            </div>
+            
+            <div class="font-card">
+                <div class="font-title">Assignment 9: Contact Card</div>
+                <div class="font-recommendation">👤 Contact Name: GoogleFonts.montserrat(fontWeight: FontWeight.bold)</div>
+                <div class="font-recommendation">📞 Contact Info: GoogleFonts.roboto(fontWeight: FontWeight.w400)</div>
+                <div class="font-recommendation">📍 Address: GoogleFonts.openSans(fontWeight: FontWeight.w400)</div>
+            </div>
+            
+            <div class="font-card">
+                <div class="font-title">Assignment 10: App About Page</div>
+                <div class="font-recommendation">📱 App Name: GoogleFonts.poppins(fontWeight: FontWeight.bold)</div>
+                <div class="font-recommendation">📖 Description: GoogleFonts.inter(fontWeight: FontWeight.w400)</div>
+                <div class="font-recommendation">👨‍💻 Developer Info: GoogleFonts.roboto(fontWeight: FontWeight.w500)</div>
+            </div>
+            
+            <div style="background: rgba(255,255,255,0.1); border-radius: 15px; padding: 20px; margin-top: 20px; border: 1px solid rgba(255,255,255,0.2);">
+                <h3 style="color: #ffd700; margin-bottom: 15px;">📦 How to Use Google Fonts in Flutter</h3>
+                <div style="color: white; line-height: 1.6;">
+                    <p><strong>1. Add to pubspec.yaml:</strong></p>
+                    <code style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 5px; display: block; margin: 10px 0;">
+                        dependencies:<br>
+                        &nbsp;&nbsp;google_fonts: ^6.1.0
+                    </code>
+                    <p><strong>2. Import in your Dart file:</strong></p>
+                    <code style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 5px; display: block; margin: 10px 0;">
+                        import 'package:google_fonts/google_fonts.dart';
+                    </code>
+                    <p><strong>3. Use in Text widgets:</strong></p>
+                    <code style="background: rgba(0,0,0,0.3); padding: 8px; border-radius: 5px; display: block; margin: 10px 0;">
+                        Text(<br>
+                        &nbsp;&nbsp;'Your Text Here',<br>
+                        &nbsp;&nbsp;style: GoogleFonts.poppins(fontWeight: FontWeight.bold),<br>
+                        )
+                    </code>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
