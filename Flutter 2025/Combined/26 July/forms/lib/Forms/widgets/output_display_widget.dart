@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../theme/app_theme.dart';
 
 class OutputDisplayWidget extends StatelessWidget {
   final String basicText;
@@ -41,20 +40,11 @@ class OutputDisplayWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppTheme.surfaceColor,
-        borderRadius: BorderRadius.circular(AppTheme.borderRadiusL),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            blurRadius: 10,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
+    final theme = Theme.of(context);
+    
+    return Card(
       child: Padding(
-        padding: const EdgeInsets.all(AppTheme.spacingM),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -62,37 +52,39 @@ class OutputDisplayWidget extends StatelessWidget {
               children: [
                 Icon(
                   Icons.analytics,
-                  color: AppTheme.primaryColor,
+                  color: theme.colorScheme.primary,
                   size: 20,
                 ),
-                const SizedBox(width: AppTheme.spacingS),
+                const SizedBox(width: 8),
                 Text(
                   'Current Values',
-                  style: AppTheme.subheadingStyle,
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ],
             ),
-            const SizedBox(height: AppTheme.spacingM),
+            const SizedBox(height: 16),
             Wrap(
-              spacing: AppTheme.spacingM,
-              runSpacing: AppTheme.spacingS,
+              spacing: 16,
+              runSpacing: 8,
               children: [
-                _buildValueItem('Basic', basicText),
-                _buildValueItem('Name', nameText),
-                _buildValueItem('Password', '•' * passwordText.length),
-                _buildValueItem('Age', numberText),
-                _buildValueItem('Description', multilineText),
-                _buildValueItem('Address', addressText),
-                _buildValueItem('Street', streetAddressText),
-                _buildValueItem('ZIP Code', zipCodeText),
-                _buildValueItem('Email', emailText),
-                _buildValueItem('Phone', phoneText),
-                _buildValueItem('Search', searchText),
-                _buildValueItem('URL', urlText),
-                _buildValueItem('Date', dateText),
-                _buildValueItem('Time', timeText),
-                _buildValueItem('Currency', currencyText),
-                _buildValueItem('Percentage', percentageText),
+                _buildValueItem(context, 'Basic', basicText),
+                _buildValueItem(context, 'Name', nameText),
+                _buildValueItem(context, 'Password', '•' * passwordText.length),
+                _buildValueItem(context, 'Age', numberText),
+                _buildValueItem(context, 'Description', multilineText),
+                _buildValueItem(context, 'Address', addressText),
+                _buildValueItem(context, 'Street', streetAddressText),
+                _buildValueItem(context, 'ZIP Code', zipCodeText),
+                _buildValueItem(context, 'Email', emailText),
+                _buildValueItem(context, 'Phone', phoneText),
+                _buildValueItem(context, 'Search', searchText),
+                _buildValueItem(context, 'URL', urlText),
+                _buildValueItem(context, 'Date', dateText),
+                _buildValueItem(context, 'Time', timeText),
+                _buildValueItem(context, 'Currency', currencyText),
+                _buildValueItem(context, 'Percentage', percentageText),
               ],
             ),
           ],
@@ -101,31 +93,34 @@ class OutputDisplayWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildValueItem(String label, String value) {
+  Widget _buildValueItem(BuildContext context, String label, String value) {
+    final theme = Theme.of(context);
+    
     return Container(
       padding: const EdgeInsets.symmetric(
-        horizontal: AppTheme.spacingM,
-        vertical: AppTheme.spacingS,
+        horizontal: 16,
+        vertical: 8,
       ),
       decoration: BoxDecoration(
-        color: AppTheme.backgroundColor,
-        borderRadius: BorderRadius.circular(AppTheme.borderRadiusS),
-        border: Border.all(color: AppTheme.dividerColor),
+        color: theme.colorScheme.surfaceContainer,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: theme.colorScheme.outline),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             label,
-            style: AppTheme.captionStyle.copyWith(
+            style: theme.textTheme.bodySmall?.copyWith(
               fontWeight: FontWeight.w600,
+              color: theme.colorScheme.onSurfaceVariant,
             ),
           ),
           const SizedBox(height: 2),
           Text(
             value.isEmpty ? 'Not set' : value,
-            style: AppTheme.bodyStyle.copyWith(
-              color: value.isEmpty ? AppTheme.textHintColor : AppTheme.textPrimaryColor,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              color: value.isEmpty ? theme.colorScheme.onSurfaceVariant : theme.colorScheme.onSurface,
             ),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,

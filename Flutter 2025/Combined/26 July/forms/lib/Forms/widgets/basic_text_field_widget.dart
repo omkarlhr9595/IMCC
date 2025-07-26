@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../theme/app_theme.dart';
 
 class BasicTextFieldWidget extends StatelessWidget {
   final TextEditingController controller;
@@ -13,10 +12,11 @@ class BasicTextFieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: AppTheme.cardDecoration,
+    final theme = Theme.of(context);
+    
+    return Card(
       child: Padding(
-        padding: const EdgeInsets.all(AppTheme.spacingM),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -24,23 +24,25 @@ class BasicTextFieldWidget extends StatelessWidget {
               children: [
                 Icon(
                   Icons.text_fields,
-                  color: AppTheme.primaryColor,
+                  color: theme.colorScheme.primary,
                   size: 20,
                 ),
-                const SizedBox(width: AppTheme.spacingS),
+                const SizedBox(width: 8),
                 Text(
                   'Basic TextField',
-                  style: AppTheme.subheadingStyle,
+                  style: theme.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
               ],
             ),
-            const SizedBox(height: AppTheme.spacingM),
+            const SizedBox(height: 16),
             TextField(
               controller: controller,
-              decoration: AppTheme.inputDecoration(
+              decoration: InputDecoration(
                 labelText: 'Enter your name',
                 hintText: 'John Doe',
-                prefixIcon: Icons.person,
+                prefixIcon: const Icon(Icons.person),
               ),
               onChanged: (value) {
                 onChanged(value);

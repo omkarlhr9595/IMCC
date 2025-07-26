@@ -16,7 +16,6 @@ import 'widgets/name_text_field_widget.dart';
 import 'widgets/street_address_text_field_widget.dart';
 import 'widgets/zip_code_text_field_widget.dart';
 import 'widgets/output_display_widget.dart';
-import '../theme/app_theme.dart';
 
 class FormScreen extends StatefulWidget {
   const FormScreen({super.key});
@@ -106,7 +105,6 @@ class _FormScreenState extends State<FormScreen> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: const Text('Form submitted successfully!'),
-          backgroundColor: AppTheme.successColor,
           behavior: SnackBarBehavior.floating,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
@@ -118,21 +116,26 @@ class _FormScreenState extends State<FormScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text('Form TextField Demo'),
         elevation: 0,
       ),
       body: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [AppTheme.backgroundColor, AppTheme.surfaceColor],
+            colors: [
+              theme.colorScheme.surface,
+              theme.colorScheme.surfaceContainer,
+            ],
           ),
         ),
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(AppTheme.spacingM),
+          padding: const EdgeInsets.all(16),
           child: Form(
             key: _formKey,
             child: Column(
@@ -140,10 +143,10 @@ class _FormScreenState extends State<FormScreen> {
               children: [
                 // Header Section
                 Container(
-                  padding: const EdgeInsets.all(AppTheme.spacingL),
+                  padding: const EdgeInsets.all(20),
                   decoration: BoxDecoration(
-                    color: AppTheme.surfaceColor,
-                    borderRadius: BorderRadius.circular(AppTheme.borderRadiusL),
+                    color: theme.colorScheme.surface,
+                    borderRadius: BorderRadius.circular(16),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.black.withOpacity(0.05),
@@ -157,24 +160,28 @@ class _FormScreenState extends State<FormScreen> {
                       Icon(
                         Icons.edit_note,
                         size: 48,
-                        color: AppTheme.primaryColor,
+                        color: theme.colorScheme.primary,
                       ),
-                      const SizedBox(height: AppTheme.spacingM),
+                      const SizedBox(height: 16),
                       Text(
                         'Form Field Demonstrations',
-                        style: AppTheme.headingStyle,
+                        style: theme.textTheme.headlineMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
                         textAlign: TextAlign.center,
                       ),
-                      const SizedBox(height: AppTheme.spacingS),
+                      const SizedBox(height: 8),
                       Text(
                         'Explore different input types and keyboard configurations',
-                        style: AppTheme.captionStyle,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: theme.colorScheme.onSurfaceVariant,
+                        ),
                         textAlign: TextAlign.center,
                       ),
                     ],
                   ),
                 ),
-                const SizedBox(height: AppTheme.spacingL),
+                const SizedBox(height: 20),
 
                 // Basic TextField
                 BasicTextFieldWidget(
@@ -185,7 +192,7 @@ class _FormScreenState extends State<FormScreen> {
                     });
                   },
                 ),
-                const SizedBox(height: AppTheme.spacingL),
+                const SizedBox(height: 20),
 
                 // Name TextField
                 NameTextFieldWidget(
@@ -196,7 +203,7 @@ class _FormScreenState extends State<FormScreen> {
                     });
                   },
                 ),
-                const SizedBox(height: AppTheme.spacingL),
+                const SizedBox(height: 20),
 
                 // Password TextField
                 PasswordTextFieldWidget(
@@ -207,7 +214,7 @@ class _FormScreenState extends State<FormScreen> {
                     });
                   },
                 ),
-                const SizedBox(height: AppTheme.spacingL),
+                const SizedBox(height: 20),
 
                 // Number TextField
                 NumberTextFieldWidget(
@@ -218,7 +225,7 @@ class _FormScreenState extends State<FormScreen> {
                     });
                   },
                 ),
-                const SizedBox(height: AppTheme.spacingL),
+                const SizedBox(height: 20),
 
                 // Multiline TextField
                 MultilineTextFieldWidget(
@@ -229,7 +236,7 @@ class _FormScreenState extends State<FormScreen> {
                     });
                   },
                 ),
-                const SizedBox(height: AppTheme.spacingL),
+                const SizedBox(height: 20),
 
                 // Address TextField
                 AddressTextFieldWidget(
@@ -240,7 +247,7 @@ class _FormScreenState extends State<FormScreen> {
                     });
                   },
                 ),
-                const SizedBox(height: AppTheme.spacingL),
+                const SizedBox(height: 20),
 
                 // Street Address TextField
                 StreetAddressTextFieldWidget(
@@ -251,7 +258,7 @@ class _FormScreenState extends State<FormScreen> {
                     });
                   },
                 ),
-                const SizedBox(height: AppTheme.spacingL),
+                const SizedBox(height: 20),
 
                 // ZIP Code TextField
                 ZipCodeTextFieldWidget(
@@ -262,7 +269,7 @@ class _FormScreenState extends State<FormScreen> {
                     });
                   },
                 ),
-                const SizedBox(height: AppTheme.spacingL),
+                const SizedBox(height: 20),
 
                 // Email TextField with validation
                 EmailTextFieldWidget(
@@ -273,7 +280,7 @@ class _FormScreenState extends State<FormScreen> {
                     });
                   },
                 ),
-                const SizedBox(height: AppTheme.spacingL),
+                const SizedBox(height: 20),
 
                 // Phone TextField with validation
                 PhoneTextFieldWidget(
@@ -284,7 +291,7 @@ class _FormScreenState extends State<FormScreen> {
                     });
                   },
                 ),
-                const SizedBox(height: AppTheme.spacingL),
+                const SizedBox(height: 20),
 
                 // Search TextField
                 SearchTextFieldWidget(
@@ -295,7 +302,7 @@ class _FormScreenState extends State<FormScreen> {
                     });
                   },
                 ),
-                const SizedBox(height: AppTheme.spacingL),
+                const SizedBox(height: 20),
 
                 // URL TextField
                 UrlTextFieldWidget(
@@ -306,7 +313,7 @@ class _FormScreenState extends State<FormScreen> {
                     });
                   },
                 ),
-                const SizedBox(height: AppTheme.spacingL),
+                const SizedBox(height: 20),
 
                 // Date Picker
                 DateTextFieldWidget(
@@ -317,7 +324,7 @@ class _FormScreenState extends State<FormScreen> {
                     });
                   },
                 ),
-                const SizedBox(height: AppTheme.spacingL),
+                const SizedBox(height: 20),
 
                 // Time Picker
                 TimeTextFieldWidget(
@@ -328,7 +335,7 @@ class _FormScreenState extends State<FormScreen> {
                     });
                   },
                 ),
-                const SizedBox(height: AppTheme.spacingL),
+                const SizedBox(height: 20),
 
                 // Currency Selector
                 CurrencyTextFieldWidget(
@@ -339,7 +346,7 @@ class _FormScreenState extends State<FormScreen> {
                     });
                   },
                 ),
-                const SizedBox(height: AppTheme.spacingL),
+                const SizedBox(height: 20),
 
                 // Percentage Slider
                 PercentageTextFieldWidget(
@@ -350,15 +357,15 @@ class _FormScreenState extends State<FormScreen> {
                     });
                   },
                 ),
-                const SizedBox(height: AppTheme.spacingL),
+                const SizedBox(height: 20),
 
                 // Submit Button
                 Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(AppTheme.borderRadiusM),
+                    borderRadius: BorderRadius.circular(12),
                     boxShadow: [
                       BoxShadow(
-                        color: AppTheme.primaryColor.withOpacity(0.3),
+                        color: theme.colorScheme.primary.withOpacity(0.3),
                         blurRadius: 10,
                         offset: const Offset(0, 4),
                       ),
@@ -366,21 +373,28 @@ class _FormScreenState extends State<FormScreen> {
                   ),
                   child: ElevatedButton(
                     onPressed: _submitForm,
-                    style: AppTheme.primaryButtonStyle,
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         const Icon(Icons.send, size: 20),
-                        const SizedBox(width: AppTheme.spacingS),
+                        const SizedBox(width: 8),
                         Text(
                           'Submit Form',
-                          style: AppTheme.buttonStyle,
+                          style: theme.textTheme.labelLarge?.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ],
                     ),
                   ),
                 ),
-                const SizedBox(height: AppTheme.spacingL),
+                const SizedBox(height: 20),
 
                 // Output Display
                 OutputDisplayWidget(
