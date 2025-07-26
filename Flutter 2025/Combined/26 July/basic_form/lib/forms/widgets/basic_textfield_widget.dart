@@ -18,6 +18,13 @@ class _BasicTextfieldWidgetState extends State<BasicTextfieldWidget> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      decoration: InputDecoration(
+        labelText: 'Basic Textfield',
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        hintText: 'Enter your name',
+      ),
       controller: widget.controller,
       onChanged: widget.onChanged,
     );
