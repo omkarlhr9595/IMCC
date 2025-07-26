@@ -16,7 +16,7 @@ import 'widgets/name_text_field_widget.dart';
 import 'widgets/street_address_text_field_widget.dart';
 import 'widgets/zip_code_text_field_widget.dart';
 import 'widgets/output_display_widget.dart';
-import 'theme/app_theme.dart';
+import '../theme/app_theme.dart';
 
 class FormScreen extends StatefulWidget {
   const FormScreen({super.key});
