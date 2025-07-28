@@ -12,6 +12,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   Widget build(BuildContext context) {
     final topPadding = MediaQuery.of(context).padding.top;
     final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
       backgroundColor: const Color(0xFFE8F5E8), // Light teal-green background
@@ -22,8 +23,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
             children: [
               // Display Area
               Container(
-                width: double.infinity,
-                height: 400,
+                width: screenWidth,
+                height: screenHeight * 0.3,
                 padding: const EdgeInsets.all(30.0),
                 decoration: BoxDecoration(
                   color: Colors.white,
