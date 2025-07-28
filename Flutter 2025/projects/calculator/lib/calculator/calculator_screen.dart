@@ -77,8 +77,8 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text('0'),
                 Text('.'),
+                Text('0'),
                 Icon(Icons.backspace),
                 Text('='),
               ],
