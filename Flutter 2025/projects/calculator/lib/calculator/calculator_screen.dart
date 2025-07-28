@@ -24,13 +24,30 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text('AC'),
-                Text('()'),
-                Text('%'),
-                Text('÷'),
+                Container(
+                  width: 60,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    color: Colors.purple,
+                    borderRadius: BorderRadius.circular(100),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'AC',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                const Text('()'),
+                const Text('%'),
+                const Text('÷'),
               ],
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text('7'),
@@ -39,7 +56,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 Text('x'),
               ],
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text('4'),
@@ -48,7 +65,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 Text('-'),
               ],
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text('1'),
@@ -57,7 +74,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                 Text('+'),
               ],
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text('0'),
