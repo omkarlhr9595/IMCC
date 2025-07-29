@@ -484,6 +484,7 @@ class CalculatorButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onPressed,
+      
       child: Container(
         width: 70,
         height: 70,
