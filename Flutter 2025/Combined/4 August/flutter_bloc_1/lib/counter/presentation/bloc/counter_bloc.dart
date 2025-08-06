@@ -7,7 +7,7 @@ part 'counter_event.dart';
 part 'counter_state.dart';
 
 class CounterBloc extends Bloc<CounterEvent, CounterState> {
-  int _count = 0;
+  int count = 0;
 
   CounterBloc() : super(CounterInitialState(count: 0)) {
     on<CounterIncrementedEvent>(_onCounterIncrementedEvent);
@@ -19,8 +19,8 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
     Emitter<CounterState> emit,
   ) {
     emit(CounterLoadingState());
-    _count++;
-    emit(CounterChangedState(count: _count));
+    count++;
+    emit(CounterChangedState(count: count));
   }
 
   FutureOr<void> _onCounterDecrementedEvent(
@@ -28,7 +28,7 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
     Emitter<CounterState> emit,
   ) {
     emit(CounterLoadingState());
-    _count--;
-    emit(CounterChangedState(count: _count));
+    count--;
+    emit(CounterChangedState(count: count));
   }
 }
