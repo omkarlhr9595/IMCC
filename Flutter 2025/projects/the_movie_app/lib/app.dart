@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 
 import 'features/trending_movies/presentation/bloc/trending_bloc.dart';
+import 'features/trending_movies/presentation/bloc/cast_cubit.dart';
 import 'features/trending_movies/presentation/screens/trending_screen.dart';
 import 'injection_container.dart';
 import 'features/search_movies/presentation/bloc/search_bloc.dart';
@@ -17,6 +18,7 @@ class App extends StatelessWidget {
       providers: <BlocProvider<dynamic>>[
         BlocProvider<TrendingBloc>(create: (_) => TrendingBloc(sl())..add(const TrendingRequestedEvent())),
         BlocProvider<SearchBloc>(create: (_) => SearchBloc(sl())),
+        BlocProvider<CastCubit>(create: (_) => CastCubit()),
       ],
       child: DynamicColorBuilder(
         builder: (lightDynamic, darkDynamic) {

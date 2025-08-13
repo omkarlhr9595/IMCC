@@ -6,6 +6,8 @@ import '../../domain/repositories/trending_repository.dart';
 import '../datasources/local/trending_local_data_source.dart';
 import '../datasources/remote/trending_remote_data_source.dart';
 import '../models/movie_model.dart';
+import '../models/cast_member_model.dart';
+import '../../domain/entities/cast_member.dart';
 
 class TrendingRepositoryImpl implements TrendingRepository {
   TrendingRepositoryImpl(this.remoteDataSource, this.localDataSource);
@@ -26,6 +28,21 @@ class TrendingRepositoryImpl implements TrendingRepository {
       return FailureResult<List<Movie>>(NetworkFailure(e.message));
     } catch (e) {
       return FailureResult<List<Movie>>(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Result<List<CastMember>>> getMovieCast(int movieId) async {
+    try {
+      final List<CastMemberModel> models = await remoteDataSource.getMovieCast(movieId);
+      final List<CastMember> cast = models.map((e) => e.toEntity()).toList(growable: false);
+      return Success<List<CastMember>>(cast);
+    } on ServerException catch (e) {
+      return FailureResult<List<CastMember>>(ServerFailure(e.message, statusCode: e.statusCode));
+    } on NetworkException catch (e) {
+      return FailureResult<List<CastMember>>(NetworkFailure(e.message));
+    } catch (e) {
+      return FailureResult<List<CastMember>>(ServerFailure(e.toString()));
     }
   }
 }

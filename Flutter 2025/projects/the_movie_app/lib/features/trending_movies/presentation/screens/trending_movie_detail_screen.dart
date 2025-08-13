@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../domain/entities/cast_member.dart';
+import '../bloc/cast_cubit.dart';
 
 import '../../../../core/config/api_config.dart';
 import '../../domain/entities/movie.dart';
@@ -13,6 +16,7 @@ class TrendingMovieDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final String? backdrop = movie.backdropPath == null ? null : (ApiConfig.imageBaseUrlOriginal + movie.backdropPath!);
     final String? poster = movie.posterPath == null ? null : (ApiConfig.imageBaseUrlW500 + movie.posterPath!);
+    context.read<CastCubit>().load(movie.id);
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
@@ -149,6 +153,83 @@ class TrendingMovieDetailScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(16),
                   child: Text(movie.overview),
+                ),
+                BlocBuilder<CastCubit, CastState>(
+                  builder: (BuildContext context, CastState castState) {
+                    if (castState.isLoading) {
+                      return const Padding(
+                        padding: EdgeInsets.all(16),
+                        child: Center(child: CircularProgressIndicator()),
+                      );
+                    }
+                    final List<CastMember> cast = castState.cast;
+                    if (cast.isEmpty) return const SizedBox.shrink();
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+                          child: Text('Top Cast', style: Theme.of(context).textTheme.titleMedium),
+                        ),
+                        SizedBox(
+                          height: 210,
+                          child: ListView.separated(
+                            padding: const EdgeInsets.symmetric(horizontal: 16),
+                            scrollDirection: Axis.horizontal,
+                            itemCount: cast.length,
+                            separatorBuilder: (_, __) => const SizedBox(width: 12),
+                            itemBuilder: (BuildContext context, int index) {
+                              final CastMember person = cast[index];
+                              final String? profilePath = person.profilePath;
+                              final String name = person.name;
+                              final String character = person.character;
+                              final String? profileUrl = profilePath == null ? null : (ApiConfig.imageBaseUrlW500 + profilePath);
+                              return SizedBox(
+                                width: 110,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: <Widget>[
+                                    SizedBox(
+                                      height: 150,
+                                      width: double.infinity,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(12),
+                                        child: profileUrl == null
+                                            ? Container(color: Colors.black12)
+                                            : CachedNetworkImage(
+                                                imageUrl: profileUrl,
+                                                fit: BoxFit.cover,
+                                                placeholder: (context, url) => const Center(child: CircularProgressIndicator(strokeWidth: 2)),
+                                                errorWidget: (context, url, error) => const Center(child: Icon(Icons.person_off_outlined)),
+                                              ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      name,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: Theme.of(context).textTheme.bodySmall,
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    const SizedBox(height: 2),
+                                    Text(
+                                      character,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: Theme.of(context).textTheme.labelSmall?.copyWith(color: Theme.of(context).colorScheme.onSurfaceVariant),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                      ],
+                    );
+                  },
                 ),
               ],
             ),

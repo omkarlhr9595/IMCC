@@ -14,6 +14,7 @@ class TrendingBloc extends Bloc<TrendingEvent, TrendingState> {
     on<TrendingTimeWindowChangedEvent>(_onTimeWindowChanged);
     on<TrendingRequestedEvent>(_onRequested);
     on<TrendingLoadMoreRequestedEvent>(_onLoadMoreRequested);
+    // Cast event is a no-op here intentionally to keep list bloc lean
   }
 
   final GetTrendingMoviesUseCase _getTrendingMovies;

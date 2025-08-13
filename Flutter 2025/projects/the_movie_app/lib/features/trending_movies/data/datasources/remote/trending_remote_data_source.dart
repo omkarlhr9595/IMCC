@@ -4,6 +4,7 @@ import '../../../../../core/error/exceptions.dart';
 import '../../../../../core/network/dio_client.dart';
 import '../../../domain/repositories/trending_repository.dart';
 import '../../models/movie_model.dart';
+import '../../models/cast_member_model.dart';
 import '../local/trending_local_data_source.dart';
 
 abstract class TrendingRemoteDataSource {
@@ -11,6 +12,7 @@ abstract class TrendingRemoteDataSource {
     TimeWindow timeWindow, {
     required int page,
   });
+  Future<List<CastMemberModel>> getMovieCast(int movieId);
 }
 
 class TrendingRemoteDataSourceImpl implements TrendingRemoteDataSource {
@@ -36,6 +38,20 @@ class TrendingRemoteDataSourceImpl implements TrendingRemoteDataSource {
         await _local.cacheTrendingMovies(timeWindow, page, rawList);
         final List<MovieModel> models = rawList.map<MovieModel>((Map<String, dynamic> e) => MovieModel.fromJson(e)).toList(growable: false);
         return models;
+      }
+      throw ServerException(message: 'Unexpected response', statusCode: response.statusCode);
+    } on DioException catch (e) {
+      _client.throwAsServerException(e);
+    }
+  }
+
+  @override
+  Future<List<CastMemberModel>> getMovieCast(int movieId) async {
+    try {
+      final response = await _client.dio.get('/movie/$movieId/credits');
+      if (response.statusCode == 200 && response.data is Map<String, dynamic>) {
+        final List<dynamic> results = (response.data as Map<String, dynamic>)['cast'] as List<dynamic>? ?? <dynamic>[];
+        return results.whereType<Map<String, dynamic>>().map<CastMemberModel>((e) => CastMemberModel.fromJson(e)).toList(growable: false);
       }
       throw ServerException(message: 'Unexpected response', statusCode: response.statusCode);
     } on DioException catch (e) {

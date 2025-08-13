@@ -117,13 +117,27 @@ class _TrendingScreenState extends State<TrendingScreen> {
                             ),
                             const SizedBox(height: 8),
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: <Widget>[
-                                Text(
-                                  _searchController.text.trim().isEmpty ? 'Currently Trending' : 'Search Results',
-                                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                                Expanded(
+                                  child: Text(
+                                    _searchController.text.trim().isEmpty ? 'Currently Trending' : 'Search Results',
+                                    style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
                                 ),
-                                _searchController.text.trim().isEmpty ? const TimeWindowSegmented() : const SizedBox.shrink(),
+                                const SizedBox(width: 12),
+                                if (_searchController.text.trim().isEmpty)
+                                  Flexible(
+                                    child: Align(
+                                      alignment: Alignment.centerRight,
+                                      child: ConstrainedBox(
+                                        constraints: const BoxConstraints(maxWidth: 280),
+                                        child: const TimeWindowSegmented(),
+                                      ),
+                                    ),
+                                  )
+                                else
+                                  const SizedBox.shrink(),
                               ],
                             ),
                           ],
