@@ -59,19 +59,63 @@ class TrendingMovieDetailScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                           child: Hero(
                             tag: 'poster_${movie.id}',
-                            child: CachedNetworkImage(
-                              imageUrl: poster,
-                              width: 120,
-                              fit: BoxFit.cover,
-                              placeholder: (context, url) => const SizedBox(
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(PageRouteBuilder(
+                                  opaque: false,
+                                  barrierDismissible: true,
+                                  barrierColor: Colors.black54,
+                                  pageBuilder: (ctx, _, __) {
+                                    final Size size = MediaQuery.of(ctx).size;
+                                    final double maxW = size.width * 0.9;
+                                    final double maxH = size.height * 0.9;
+                                    return GestureDetector(
+                                      onTap: () => Navigator.of(ctx).pop(),
+                                      onVerticalDragEnd: (DragEndDetails details) {
+                                        final double? velocity = details.primaryVelocity;
+                                        if (velocity != null && velocity > 250) {
+                                          Navigator.of(ctx).pop();
+                                        }
+                                      },
+                                      child: Center(
+                                        child: ConstrainedBox(
+                                          constraints: BoxConstraints(
+                                            maxWidth: maxW,
+                                            maxHeight: maxH,
+                                          ),
+                                          child: Hero(
+                                            tag: 'poster_${movie.id}',
+                                            child: InteractiveViewer(
+                                              minScale: 0.5,
+                                              maxScale: 5,
+                                              child: CachedNetworkImage(
+                                                imageUrl: poster,
+                                                // No fit/width/height: use image's intrinsic size within constraints
+                                                placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                                                errorWidget: (context, url, error) => const Center(child: Icon(Icons.broken_image_outlined, color: Colors.white)),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ));
+                              },
+                              child: CachedNetworkImage(
+                                imageUrl: poster,
                                 width: 120,
-                                height: 180,
-                                child: Center(child: CircularProgressIndicator()),
-                              ),
-                              errorWidget: (context, url, error) => const SizedBox(
-                                width: 120,
-                                height: 180,
-                                child: Center(child: Icon(Icons.broken_image_outlined)),
+                                fit: BoxFit.cover,
+                                placeholder: (context, url) => const SizedBox(
+                                  width: 120,
+                                  height: 180,
+                                  child: Center(child: CircularProgressIndicator()),
+                                ),
+                                errorWidget: (context, url, error) => const SizedBox(
+                                  width: 120,
+                                  height: 180,
+                                  child: Center(child: Icon(Icons.broken_image_outlined)),
+                                ),
                               ),
                             ),
                           ),
