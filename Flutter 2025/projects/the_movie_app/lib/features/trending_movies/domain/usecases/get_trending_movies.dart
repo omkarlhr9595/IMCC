@@ -5,8 +5,9 @@ import '../repositories/trending_repository.dart';
 
 class GetTrendingMoviesParams {
   final TimeWindow timeWindow;
+  final int page;
 
-  const GetTrendingMoviesParams({required this.timeWindow});
+  const GetTrendingMoviesParams({required this.timeWindow, required this.page});
 }
 
 class GetTrendingMoviesUseCase implements UseCase<Result<List<Movie>>, GetTrendingMoviesParams> {
@@ -16,7 +17,7 @@ class GetTrendingMoviesUseCase implements UseCase<Result<List<Movie>>, GetTrendi
 
   @override
   Future<Result<List<Movie>>> call(GetTrendingMoviesParams params) {
-    return repository.getTrendingMovies(params.timeWindow);
+    return repository.getTrendingMovies(params.timeWindow, page: params.page);
   }
 }
 

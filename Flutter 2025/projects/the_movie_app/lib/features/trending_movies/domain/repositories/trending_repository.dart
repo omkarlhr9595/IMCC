@@ -4,6 +4,6 @@ import '../entities/movie.dart';
 enum TimeWindow { day, week }
 
 abstract class TrendingRepository {
-  Future<Result<List<Movie>>> getTrendingMovies(TimeWindow timeWindow);
+  Future<Result<List<Movie>>> getTrendingMovies(TimeWindow timeWindow, {required int page});
 }
 

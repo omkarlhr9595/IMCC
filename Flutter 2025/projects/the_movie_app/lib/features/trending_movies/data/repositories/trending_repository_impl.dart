@@ -12,9 +12,9 @@ class TrendingRepositoryImpl implements TrendingRepository {
   final TrendingRemoteDataSource remoteDataSource;
 
   @override
-  Future<Result<List<Movie>>> getTrendingMovies(TimeWindow timeWindow) async {
+  Future<Result<List<Movie>>> getTrendingMovies(TimeWindow timeWindow, {required int page}) async {
     try {
-      final List<MovieModel> models = await remoteDataSource.getTrendingMovies(timeWindow);
+      final List<MovieModel> models = await remoteDataSource.getTrendingMovies(timeWindow, page: page);
       final List<Movie> movies = models.map((MovieModel m) => m.toEntity()).toList(growable: false);
       return Success<List<Movie>>(movies);
     } on ServerException catch (e) {

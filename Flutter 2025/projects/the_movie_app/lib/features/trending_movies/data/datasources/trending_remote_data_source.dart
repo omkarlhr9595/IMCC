@@ -6,7 +6,7 @@ import '../../domain/repositories/trending_repository.dart';
 import '../models/movie_model.dart';
 
 abstract class TrendingRemoteDataSource {
-  Future<List<MovieModel>> getTrendingMovies(TimeWindow timeWindow);
+  Future<List<MovieModel>> getTrendingMovies(TimeWindow timeWindow, {required int page});
 }
 
 class TrendingRemoteDataSourceImpl implements TrendingRemoteDataSource {
@@ -15,10 +15,10 @@ class TrendingRemoteDataSourceImpl implements TrendingRemoteDataSource {
   final DioClient _client;
 
   @override
-  Future<List<MovieModel>> getTrendingMovies(TimeWindow timeWindow) async {
+  Future<List<MovieModel>> getTrendingMovies(TimeWindow timeWindow, {required int page}) async {
     final String path = '/trending/movie/${timeWindow == TimeWindow.day ? 'day' : 'week'}';
     try {
-      final Response<dynamic> response = await _client.dio.get(path);
+      final Response<dynamic> response = await _client.dio.get(path, queryParameters: <String, dynamic>{'page': page});
       if (response.statusCode == 200 && response.data is Map<String, dynamic>) {
         final List<dynamic> results = (response.data as Map<String, dynamic>)['results'] as List<dynamic>? ?? <dynamic>[];
         final List<MovieModel> models = results

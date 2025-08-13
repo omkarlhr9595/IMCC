@@ -10,6 +10,10 @@ class TrendingRequestedEvent extends TrendingEvent {
   const TrendingRequestedEvent();
 }
 
+class TrendingLoadMoreRequestedEvent extends TrendingEvent {
+  const TrendingLoadMoreRequestedEvent();
+}
+
 class TrendingTimeWindowChangedEvent extends TrendingEvent {
   final TimeWindow timeWindow;
   const TrendingTimeWindowChangedEvent(this.timeWindow);

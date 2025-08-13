@@ -13,6 +13,7 @@ class TrendingBloc extends Bloc<TrendingEvent, TrendingState> {
   TrendingBloc(this._getTrendingMovies) : super(const TrendingInitialState(TimeWindow.day)) {
     on<TrendingTimeWindowChangedEvent>(_onTimeWindowChanged);
     on<TrendingRequestedEvent>(_onRequested);
+    on<TrendingLoadMoreRequestedEvent>(_onLoadMoreRequested);
   }
 
   final GetTrendingMoviesUseCase _getTrendingMovies;
@@ -26,9 +27,9 @@ class TrendingBloc extends Bloc<TrendingEvent, TrendingState> {
   Future<void> _onRequested(TrendingRequestedEvent event, Emitter<TrendingState> emit) async {
     emit(TrendingLoadingState(state.timeWindow));
     try {
-      final Result<List<Movie>> result = await _getTrendingMovies(GetTrendingMoviesParams(timeWindow: state.timeWindow));
+      final Result<List<Movie>> result = await _getTrendingMovies(GetTrendingMoviesParams(timeWindow: state.timeWindow, page: 1));
       result.when(
-        success: (List<Movie> movies) => emit(TrendingSuccessState(movies: movies, timeWindow: state.timeWindow)),
+        success: (List<Movie> movies) => emit(TrendingSuccessState(movies: movies, timeWindow: state.timeWindow, hasReachedMax: movies.isEmpty, page: 1)),
         failure: (failure) => emit(TrendingFailureState(message: failure.message, timeWindow: state.timeWindow)),
       );
     } catch (e) {
@@ -36,9 +37,56 @@ class TrendingBloc extends Bloc<TrendingEvent, TrendingState> {
     }
   }
 
+  Future<void> _onLoadMoreRequested(TrendingLoadMoreRequestedEvent event, Emitter<TrendingState> emit) async {
+    final TrendingState current = state;
+    if (current is! TrendingSuccessState) return;
+    if (current.hasReachedMax) return;
+    final int nextPage = current.page + 1;
+    emit(TrendingSuccessState(
+      movies: current.movies,
+      timeWindow: current.timeWindow,
+      hasReachedMax: current.hasReachedMax,
+      page: current.page,
+      isLoadingMore: true,
+    ));
+    try {
+      final Result<List<Movie>> result = await _getTrendingMovies(GetTrendingMoviesParams(timeWindow: current.timeWindow, page: nextPage));
+      result.when(
+        success: (List<Movie> movies) {
+          final List<Movie> combined = List<Movie>.of(current.movies)..addAll(movies);
+          emit(TrendingSuccessState(
+            movies: combined,
+            timeWindow: current.timeWindow,
+            hasReachedMax: movies.isEmpty,
+            page: nextPage,
+            isLoadingMore: false,
+          ));
+        },
+        failure: (failure) {
+          // Keep current state on failure; optionally could emit failure
+          emit(TrendingSuccessState(
+            movies: current.movies,
+            timeWindow: current.timeWindow,
+            hasReachedMax: current.hasReachedMax,
+            page: current.page,
+            isLoadingMore: false,
+          ));
+        },
+      );
+    } catch (_) {
+      emit(TrendingSuccessState(
+        movies: current.movies,
+        timeWindow: current.timeWindow,
+        hasReachedMax: current.hasReachedMax,
+        page: current.page,
+        isLoadingMore: false,
+      ));
+    }
+  }
+
   TrendingState _mapToSameStateTypeWithNewWindow(TrendingState current, TimeWindow newWindow) {
     if (current is TrendingSuccessState) {
-      return TrendingSuccessState(movies: current.movies, timeWindow: newWindow);
+      return TrendingSuccessState(movies: current.movies, timeWindow: newWindow, hasReachedMax: current.hasReachedMax, page: current.page);
     }
     if (current is TrendingFailureState) {
       return TrendingFailureState(message: current.message, timeWindow: newWindow);

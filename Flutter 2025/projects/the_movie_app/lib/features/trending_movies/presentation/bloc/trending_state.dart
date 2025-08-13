@@ -18,10 +18,13 @@ class TrendingLoadingState extends TrendingState {
 
 class TrendingSuccessState extends TrendingState {
   final List<Movie> movies;
-  const TrendingSuccessState({required this.movies, required TimeWindow timeWindow}) : super(timeWindow);
+  final bool hasReachedMax;
+  final int page;
+  final bool isLoadingMore;
+  const TrendingSuccessState({required this.movies, required TimeWindow timeWindow, required this.hasReachedMax, required this.page, this.isLoadingMore = false}) : super(timeWindow);
 
   @override
-  List<Object?> get props => <Object?>[movies, timeWindow];
+  List<Object?> get props => <Object?>[movies, timeWindow, hasReachedMax, page, isLoadingMore];
 }
 
 class TrendingFailureState extends TrendingState {
