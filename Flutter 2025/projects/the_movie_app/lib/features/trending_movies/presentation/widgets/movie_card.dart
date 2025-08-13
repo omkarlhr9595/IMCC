@@ -31,9 +31,7 @@ class MovieCard extends StatelessWidget {
                         fit: BoxFit.cover,
                         loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? progress) {
                           if (progress == null) return child;
-                          final double? value = (progress.expectedTotalBytes != null)
-                              ? progress.cumulativeBytesLoaded / progress.expectedTotalBytes!
-                              : null;
+                          final double? value = (progress.expectedTotalBytes != null) ? progress.cumulativeBytesLoaded / progress.expectedTotalBytes! : null;
                           return Center(child: CircularProgressIndicator(value: value));
                         },
                         errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
@@ -66,8 +64,7 @@ class MovieCard extends StatelessWidget {
                         children: <Widget>[
                           const Icon(Icons.star_rounded, color: Colors.amber, size: 18),
                           const SizedBox(width: 4),
-                          Text((movie.voteAverage ?? 0).toStringAsFixed(1),
-                              style: const TextStyle(color: Colors.white)),
+                          Text((movie.voteAverage ?? 0).toStringAsFixed(1), style: const TextStyle(color: Colors.white)),
                         ],
                       ),
                       const SizedBox(height: 4),
@@ -88,4 +85,3 @@ class MovieCard extends StatelessWidget {
     );
   }
 }
-

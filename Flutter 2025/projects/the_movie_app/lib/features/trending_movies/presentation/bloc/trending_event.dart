@@ -6,13 +6,13 @@ abstract class TrendingEvent extends Equatable {
   List<Object?> get props => <Object?>[];
 }
 
-class TrendingRequested extends TrendingEvent {
-  const TrendingRequested();
+class TrendingRequestedEvent extends TrendingEvent {
+  const TrendingRequestedEvent();
 }
 
-class TrendingTimeWindowChanged extends TrendingEvent {
+class TrendingTimeWindowChangedEvent extends TrendingEvent {
   final TimeWindow timeWindow;
-  const TrendingTimeWindowChanged(this.timeWindow);
+  const TrendingTimeWindowChangedEvent(this.timeWindow);
 
   @override
   List<Object?> get props => <Object?>[timeWindow];

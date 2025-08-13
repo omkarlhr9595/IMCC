@@ -8,25 +8,25 @@ abstract class TrendingState extends Equatable {
   List<Object?> get props => <Object?>[timeWindow];
 }
 
-class TrendingInitial extends TrendingState {
-  const TrendingInitial(super.timeWindow);
+class TrendingInitialState extends TrendingState {
+  const TrendingInitialState(super.timeWindow);
 }
 
-class TrendingLoading extends TrendingState {
-  const TrendingLoading(super.timeWindow);
+class TrendingLoadingState extends TrendingState {
+  const TrendingLoadingState(super.timeWindow);
 }
 
-class TrendingSuccess extends TrendingState {
+class TrendingSuccessState extends TrendingState {
   final List<Movie> movies;
-  const TrendingSuccess({required this.movies, required TimeWindow timeWindow}) : super(timeWindow);
+  const TrendingSuccessState({required this.movies, required TimeWindow timeWindow}) : super(timeWindow);
 
   @override
   List<Object?> get props => <Object?>[movies, timeWindow];
 }
 
-class TrendingFailure extends TrendingState {
+class TrendingFailureState extends TrendingState {
   final String message;
-  const TrendingFailure({required this.message, required TimeWindow timeWindow}) : super(timeWindow);
+  const TrendingFailureState({required this.message, required TimeWindow timeWindow}) : super(timeWindow);
 
   @override
   List<Object?> get props => <Object?>[message, timeWindow];

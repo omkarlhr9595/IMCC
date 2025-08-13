@@ -12,7 +12,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: <BlocProvider<dynamic>>[
-        BlocProvider<TrendingBloc>(create: (_) => TrendingBloc(sl())..add(const TrendingRequested())),
+        BlocProvider<TrendingBloc>(create: (_) => TrendingBloc(sl())..add(const TrendingRequestedEvent())),
       ],
       child: const MaterialApp(home: TrendingScreen()),
     );

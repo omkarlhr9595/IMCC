@@ -19,10 +19,10 @@ class TrendingScreen extends StatelessWidget {
       ),
       body: BlocBuilder<TrendingBloc, TrendingState>(
         builder: (BuildContext context, TrendingState state) {
-          if (state is TrendingLoading || state is TrendingInitial) {
+          if (state is TrendingLoadingState || state is TrendingInitialState) {
             return const Center(child: CircularProgressIndicator());
           }
-          if (state is TrendingFailure) {
+          if (state is TrendingFailureState) {
             return Center(
               child: Padding(
                 padding: const EdgeInsets.all(16),
@@ -30,7 +30,7 @@ class TrendingScreen extends StatelessWidget {
               ),
             );
           }
-          if (state is TrendingSuccess) {
+          if (state is TrendingSuccessState) {
             return GridView.builder(
               padding: const EdgeInsets.all(12),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
