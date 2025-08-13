@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'features/trending_movies/presentation/bloc/trending_bloc.dart';
@@ -14,7 +15,14 @@ class App extends StatelessWidget {
       providers: <BlocProvider<dynamic>>[
         BlocProvider<TrendingBloc>(create: (_) => TrendingBloc(sl())..add(const TrendingRequestedEvent())),
       ],
-      child: const MaterialApp(home: TrendingScreen()),
+      child: MaterialApp(
+        theme: ThemeData(
+          colorSchemeSeed: const Color(0xFF6750A4),
+          useMaterial3: true,
+          textTheme: GoogleFonts.interTextTheme(),
+        ),
+        home: const TrendingScreen(),
+      ),
     );
   }
 }

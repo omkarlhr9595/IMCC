@@ -22,25 +22,27 @@ class MovieCard extends StatelessWidget {
           ),
           child: Stack(
             children: <Widget>[
-              AspectRatio(
-                aspectRatio: 2 / 3,
+              Positioned.fill(
                 child: imageUrl == null
                     ? Container(color: Colors.grey.shade300)
-                    : Image.network(
-                        imageUrl,
-                        fit: BoxFit.cover,
-                        loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? progress) {
-                          if (progress == null) return child;
-                          final double? value = (progress.expectedTotalBytes != null) ? progress.cumulativeBytesLoaded / progress.expectedTotalBytes! : null;
-                          return Center(child: CircularProgressIndicator(value: value));
-                        },
-                        errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
-                          return Container(
-                            color: Colors.grey.shade300,
-                            alignment: Alignment.center,
-                            child: const Icon(Icons.broken_image_outlined),
-                          );
-                        },
+                    : Hero(
+                        tag: 'poster_${movie.id}',
+                        child: Image.network(
+                          imageUrl,
+                          fit: BoxFit.cover,
+                          loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? progress) {
+                            if (progress == null) return child;
+                            final double? value = (progress.expectedTotalBytes != null) ? progress.cumulativeBytesLoaded / progress.expectedTotalBytes! : null;
+                            return Center(child: CircularProgressIndicator(value: value));
+                          },
+                          errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
+                            return Container(
+                              color: Colors.grey.shade300,
+                              alignment: Alignment.center,
+                              child: const Icon(Icons.broken_image_outlined),
+                            );
+                          },
+                        ),
                       ),
               ),
               Positioned(

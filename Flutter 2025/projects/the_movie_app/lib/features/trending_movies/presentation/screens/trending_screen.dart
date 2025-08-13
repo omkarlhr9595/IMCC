@@ -11,45 +11,63 @@ class TrendingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Trending Movies'),
-        actions: const <Widget>[
-          TimeWindowSegmented(),
-        ],
-      ),
       body: BlocBuilder<TrendingBloc, TrendingState>(
         builder: (BuildContext context, TrendingState state) {
-          if (state is TrendingLoadingState || state is TrendingInitialState) {
-            return const Center(child: CircularProgressIndicator());
-          }
-          if (state is TrendingFailureState) {
-            return Center(
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Text(state.message),
+          return CustomScrollView(
+            slivers: <Widget>[
+              const SliverToBoxAdapter(
+                child: SafeArea(
+                  bottom: false,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(16, 16, 16, 8),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: <Widget>[
+                            Text('Currently Trending', style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700)),
+                            TimeWindowSegmented(),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
               ),
-            );
-          }
-          if (state is TrendingSuccessState) {
-            return GridView.builder(
-              padding: const EdgeInsets.all(12),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                childAspectRatio: 0.66,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 12,
-              ),
-              itemCount: state.movies.length,
-              itemBuilder: (BuildContext context, int index) {
-                final movie = state.movies[index];
-                return MovieCard(movie: movie);
-              },
-            );
-          }
-          return const SizedBox.shrink();
+              if (state is TrendingLoadingState || state is TrendingInitialState)
+                const SliverFillRemaining(child: Center(child: CircularProgressIndicator()))
+              else if (state is TrendingFailureState)
+                SliverFillRemaining(
+                  child: Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Text(state.message),
+                    ),
+                  ),
+                )
+              else if (state is TrendingSuccessState)
+                SliverPadding(
+                  padding: const EdgeInsets.all(12),
+                  sliver: SliverGrid(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 0.70,
+                      crossAxisSpacing: 12,
+                      mainAxisSpacing: 12,
+                    ),
+                    delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) => MovieCard(movie: state.movies[index]),
+                      childCount: state.movies.length,
+                    ),
+                  ),
+                )
+              else
+                const SliverToBoxAdapter(child: SizedBox.shrink()),
+            ],
+          );
         },
       ),
     );
   }
 }
-
