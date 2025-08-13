@@ -26,10 +26,7 @@ class DioClient {
 
   Never throwAsServerException(DioException error) {
     final int? status = error.response?.statusCode;
-    final String message = error.response?.data is Map<String, dynamic>
-        ? (error.response?.data['status_message']?.toString() ?? error.message ?? 'Unknown server error')
-        : (error.message ?? 'Unknown server error');
+    final String message = error.response?.data is Map<String, dynamic> ? (error.response?.data['status_message']?.toString() ?? error.message ?? 'Unknown server error') : (error.message ?? 'Unknown server error');
     throw ServerException(message: message, statusCode: status);
   }
 }
-

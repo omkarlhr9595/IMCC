@@ -21,10 +21,12 @@ class TrendingRemoteDataSourceImpl implements TrendingRemoteDataSource {
       final Response<dynamic> response = await _client.dio.get(path);
       if (response.statusCode == 200 && response.data is Map<String, dynamic>) {
         final List<dynamic> results = (response.data as Map<String, dynamic>)['results'] as List<dynamic>? ?? <dynamic>[];
-        return results
+        final List<MovieModel> models = results
             .whereType<Map<String, dynamic>>()
             .map<MovieModel>((Map<String, dynamic> e) => MovieModel.fromJson(e))
             .toList(growable: false);
+        
+        return models;
       }
       throw ServerException(message: 'Unexpected response', statusCode: response.statusCode);
     } on DioException catch (e) {

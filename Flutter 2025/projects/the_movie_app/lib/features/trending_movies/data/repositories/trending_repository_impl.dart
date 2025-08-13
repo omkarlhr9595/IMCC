@@ -4,6 +4,7 @@ import '../../../../core/result/result.dart';
 import '../../domain/entities/movie.dart';
 import '../../domain/repositories/trending_repository.dart';
 import '../datasources/trending_remote_data_source.dart';
+import '../models/movie_model.dart';
 
 class TrendingRepositoryImpl implements TrendingRepository {
   TrendingRepositoryImpl(this.remoteDataSource);
@@ -13,7 +14,8 @@ class TrendingRepositoryImpl implements TrendingRepository {
   @override
   Future<Result<List<Movie>>> getTrendingMovies(TimeWindow timeWindow) async {
     try {
-      final List<Movie> movies = await remoteDataSource.getTrendingMovies(timeWindow);
+      final List<MovieModel> models = await remoteDataSource.getTrendingMovies(timeWindow);
+      final List<Movie> movies = models.map((MovieModel m) => m.toEntity()).toList(growable: false);
       return Success<List<Movie>>(movies);
     } on ServerException catch (e) {
       return FailureResult<List<Movie>>(ServerFailure(e.message, statusCode: e.statusCode));
