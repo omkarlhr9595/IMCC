@@ -3,7 +3,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../../../core/config/api_config.dart';
 import '../../domain/entities/movie.dart';
-import '../screens/trending_movie_detail_screen.dart';
+import 'package:go_router/go_router.dart';
+import '../screens/movie_details_screen.dart';
 
 class MovieCard extends StatelessWidget {
   const MovieCard({super.key, required this.movie});
@@ -18,9 +19,7 @@ class MovieCard extends StatelessWidget {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: () => Navigator.of(context).push(
-            MaterialPageRoute(builder: (_) => TrendingMovieDetailScreen(movie: movie)),
-          ),
+          onTap: () => context.pushNamed(MovieDetailsScreen.routeName, extra: movie),
           child: Stack(
             children: <Widget>[
               Positioned.fill(

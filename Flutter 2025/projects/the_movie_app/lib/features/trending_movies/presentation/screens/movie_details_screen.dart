@@ -7,8 +7,10 @@ import '../bloc/cast_cubit.dart';
 import '../../../../core/config/api_config.dart';
 import '../../domain/entities/movie.dart';
 
-class TrendingMovieDetailScreen extends StatelessWidget {
-  const TrendingMovieDetailScreen({super.key, required this.movie});
+class MovieDetailsScreen extends StatelessWidget {
+  static const String routeName = 'MovieDetailsScreen';
+
+  const MovieDetailsScreen({super.key, required this.movie});
 
   final Movie movie;
 
@@ -94,7 +96,6 @@ class TrendingMovieDetailScreen extends StatelessWidget {
                                               maxScale: 5,
                                               child: CachedNetworkImage(
                                                 imageUrl: poster,
-                                                // No fit/width/height: use image's intrinsic size within constraints
                                                 placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
                                                 errorWidget: (context, url, error) => const Center(child: Icon(Icons.broken_image_outlined, color: Colors.white)),
                                               ),
@@ -239,3 +240,4 @@ class TrendingMovieDetailScreen extends StatelessWidget {
     );
   }
 }
+

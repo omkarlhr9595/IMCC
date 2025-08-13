@@ -5,7 +5,7 @@ import 'package:dynamic_color/dynamic_color.dart';
 
 import 'features/trending_movies/presentation/bloc/trending_bloc.dart';
 import 'features/trending_movies/presentation/bloc/cast_cubit.dart';
-import 'features/trending_movies/presentation/screens/trending_screen.dart';
+import 'router.dart';
 import 'injection_container.dart';
 import 'features/search_movies/presentation/bloc/search_bloc.dart';
 
@@ -40,7 +40,9 @@ class App extends StatelessWidget {
             );
           }
 
-          return MaterialApp(
+          final router = AppRouter.create();
+
+          return MaterialApp.router(
             theme: ThemeData(
               colorScheme: lightScheme,
               useMaterial3: true,
@@ -62,7 +64,7 @@ class App extends StatelessWidget {
               ),
             ),
             themeMode: ThemeMode.system,
-            home: const TrendingScreen(),
+            routerConfig: router,
           );
         },
       ),
