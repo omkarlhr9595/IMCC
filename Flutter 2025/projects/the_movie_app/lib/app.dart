@@ -6,6 +6,7 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'features/trending_movies/presentation/bloc/trending_bloc.dart';
 import 'features/trending_movies/presentation/screens/trending_screen.dart';
 import 'injection_container.dart';
+import 'features/search_movies/presentation/bloc/search_bloc.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -15,6 +16,7 @@ class App extends StatelessWidget {
     return MultiBlocProvider(
       providers: <BlocProvider<dynamic>>[
         BlocProvider<TrendingBloc>(create: (_) => TrendingBloc(sl())..add(const TrendingRequestedEvent())),
+        BlocProvider<SearchBloc>(create: (_) => SearchBloc(sl())),
       ],
       child: DynamicColorBuilder(
         builder: (lightDynamic, darkDynamic) {
