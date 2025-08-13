@@ -10,6 +10,10 @@ class TrendingRequestedEvent extends TrendingEvent {
   const TrendingRequestedEvent();
 }
 
+class TrendingHardRefreshRequestedEvent extends TrendingEvent {
+  const TrendingHardRefreshRequestedEvent();
+}
+
 class TrendingLoadMoreRequestedEvent extends TrendingEvent {
   const TrendingLoadMoreRequestedEvent();
 }
@@ -21,4 +25,3 @@ class TrendingTimeWindowChangedEvent extends TrendingEvent {
   @override
   List<Object?> get props => <Object?>[timeWindow];
 }
-

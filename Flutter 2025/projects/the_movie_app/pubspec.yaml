@@ -19,6 +19,7 @@ dependencies:
   dynamic_color: 1.7.0
   cached_network_image: ^3.4.1
   very_good_infinite_list: ^0.7.1
+  shared_preferences: ^2.3.2
 
 dev_dependencies:
   flutter_test:

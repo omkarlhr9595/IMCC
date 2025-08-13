@@ -21,13 +21,44 @@ class TrendingBloc extends Bloc<TrendingEvent, TrendingState> {
   Future<void> _onTimeWindowChanged(TrendingTimeWindowChangedEvent event, Emitter<TrendingState> emit) async {
     final TimeWindow newWindow = event.timeWindow;
     emit(_mapToSameStateTypeWithNewWindow(state, newWindow));
-    add(const TrendingRequestedEvent());
+    try {
+      // 1) Try cache/network (no forced refresh) without flashing a loading state
+      final Result<List<Movie>> cachedOrNetwork = await _getTrendingMovies(GetTrendingMoviesParams(timeWindow: newWindow, page: 1));
+      cachedOrNetwork.when(
+        success: (List<Movie> movies) => emit(TrendingSuccessState(
+          movies: movies,
+          timeWindow: newWindow,
+          hasReachedMax: movies.isEmpty,
+          page: 1,
+        )),
+        failure: (_) {
+          // If it fails and we currently had content, keep showing it; otherwise, fall back to loading + hard refresh
+          if (state is! TrendingSuccessState) {
+            emit(TrendingLoadingState(newWindow));
+          }
+        },
+      );
+
+      // 2) Background hard refresh to ensure freshness (no loading state)
+      final Result<List<Movie>> fresh = await _getTrendingMovies(GetTrendingMoviesParams(timeWindow: newWindow, page: 1, forceRefresh: true));
+      fresh.when(
+        success: (List<Movie> movies) => emit(TrendingSuccessState(
+          movies: movies,
+          timeWindow: newWindow,
+          hasReachedMax: movies.isEmpty,
+          page: 1,
+        )),
+        failure: (_) {},
+      );
+    } catch (_) {
+      // ignore
+    }
   }
 
   Future<void> _onRequested(TrendingRequestedEvent event, Emitter<TrendingState> emit) async {
     emit(TrendingLoadingState(state.timeWindow));
     try {
-      final Result<List<Movie>> result = await _getTrendingMovies(GetTrendingMoviesParams(timeWindow: state.timeWindow, page: 1));
+      final Result<List<Movie>> result = await _getTrendingMovies(GetTrendingMoviesParams(timeWindow: state.timeWindow, page: 1, forceRefresh: true));
       result.when(
         success: (List<Movie> movies) => emit(TrendingSuccessState(movies: movies, timeWindow: state.timeWindow, hasReachedMax: movies.isEmpty, page: 1)),
         failure: (failure) => emit(TrendingFailureState(message: failure.message, timeWindow: state.timeWindow)),
@@ -97,4 +128,3 @@ class TrendingBloc extends Bloc<TrendingEvent, TrendingState> {
     return TrendingInitialState(newWindow);
   }
 }
-
