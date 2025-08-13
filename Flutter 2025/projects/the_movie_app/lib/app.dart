@@ -40,12 +40,22 @@ class App extends StatelessWidget {
             theme: ThemeData(
               colorScheme: lightScheme,
               useMaterial3: true,
-              textTheme: GoogleFonts.interTextTheme(),
+              textTheme: GoogleFonts.interTextTheme(
+                ThemeData(
+                  colorScheme: lightScheme,
+                  useMaterial3: true,
+                ).textTheme,
+              ),
             ),
             darkTheme: ThemeData(
               colorScheme: darkScheme,
               useMaterial3: true,
-              textTheme: GoogleFonts.interTextTheme(),
+              textTheme: GoogleFonts.interTextTheme(
+                ThemeData(
+                  colorScheme: darkScheme,
+                  useMaterial3: true,
+                ).textTheme,
+              ),
             ),
             themeMode: ThemeMode.system,
             home: const TrendingScreen(),
