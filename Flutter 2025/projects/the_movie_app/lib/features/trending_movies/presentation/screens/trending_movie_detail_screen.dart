@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../../../core/config/api_config.dart';
 import '../../domain/entities/movie.dart';
@@ -22,7 +23,15 @@ class TrendingMovieDetailScreen extends StatelessWidget {
               background: Stack(
                 fit: StackFit.expand,
                 children: <Widget>[
-                  if (backdrop != null) Image.network(backdrop, fit: BoxFit.cover) else Container(color: Colors.black12),
+                  if (backdrop != null)
+                    CachedNetworkImage(
+                      imageUrl: backdrop,
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                      errorWidget: (context, url, error) => Container(color: Colors.black12),
+                    )
+                  else
+                    Container(color: Colors.black12),
                   const DecoratedBox(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
@@ -50,26 +59,20 @@ class TrendingMovieDetailScreen extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8),
                           child: Hero(
                             tag: 'poster_${movie.id}',
-                            child: Image.network(
-                              poster,
+                            child: CachedNetworkImage(
+                              imageUrl: poster,
                               width: 120,
                               fit: BoxFit.cover,
-                              loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? progress) {
-                                if (progress == null) return child;
-                                final double? value = (progress.expectedTotalBytes != null) ? progress.cumulativeBytesLoaded / progress.expectedTotalBytes! : null;
-                                return SizedBox(width: 120, height: 180, child: Center(child: CircularProgressIndicator(value: value)));
-                              },
-                              errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
-                                return SizedBox(
-                                  width: 120,
-                                  height: 180,
-                                  child: Container(
-                                    color: Colors.black12,
-                                    alignment: Alignment.center,
-                                    child: const Icon(Icons.broken_image_outlined),
-                                  ),
-                                );
-                              },
+                              placeholder: (context, url) => const SizedBox(
+                                width: 120,
+                                height: 180,
+                                child: Center(child: CircularProgressIndicator()),
+                              ),
+                              errorWidget: (context, url, error) => const SizedBox(
+                                width: 120,
+                                height: 180,
+                                child: Center(child: Icon(Icons.broken_image_outlined)),
+                              ),
                             ),
                           ),
                         ),

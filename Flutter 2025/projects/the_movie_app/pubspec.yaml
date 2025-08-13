@@ -17,6 +17,7 @@ dependencies:
   google_fonts: ^6.3.0
   json_annotation: ^4.9.0
   dynamic_color: 1.7.0
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:

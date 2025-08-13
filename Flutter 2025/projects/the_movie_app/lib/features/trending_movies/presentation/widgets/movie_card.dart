@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../../../core/config/api_config.dart';
 import '../../domain/entities/movie.dart';
@@ -27,21 +28,15 @@ class MovieCard extends StatelessWidget {
                     ? Container(color: Colors.grey.shade300)
                     : Hero(
                         tag: 'poster_${movie.id}',
-                        child: Image.network(
-                          imageUrl,
+                        child: CachedNetworkImage(
+                          imageUrl: imageUrl,
                           fit: BoxFit.cover,
-                          loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? progress) {
-                            if (progress == null) return child;
-                            final double? value = (progress.expectedTotalBytes != null) ? progress.cumulativeBytesLoaded / progress.expectedTotalBytes! : null;
-                            return Center(child: CircularProgressIndicator(value: value));
-                          },
-                          errorBuilder: (BuildContext context, Object error, StackTrace? stackTrace) {
-                            return Container(
-                              color: Colors.grey.shade300,
-                              alignment: Alignment.center,
-                              child: const Icon(Icons.broken_image_outlined),
-                            );
-                          },
+                          placeholder: (context, url) => const Center(child: CircularProgressIndicator()),
+                          errorWidget: (context, url, error) => Container(
+                            color: Colors.grey.shade300,
+                            alignment: Alignment.center,
+                            child: const Icon(Icons.broken_image_outlined),
+                          ),
                         ),
                       ),
               ),
