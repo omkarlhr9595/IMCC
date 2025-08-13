@@ -1,3 +1,5 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 class ApiConfig {
   ApiConfig._();
 
@@ -5,8 +7,5 @@ class ApiConfig {
   static const String imageBaseUrlW500 = 'https://image.tmdb.org/t/p/w500';
   static const String imageBaseUrlOriginal = 'https://image.tmdb.org/t/p/original';
 
-  // Replace with your TMDB API key or use a secure secret management strategy.
-  // For production, prefer using runtime configuration or platform-specific secrets.
-  static const String tmdbApiKey = '1223fd78fa145204fd69f034166e6bee';
+  static String tmdbApiKey = dotenv.get('TMDB_API_KEY');
 }
-
