@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../core/config/api_config.dart';
 import '../../domain/entities/movie.dart';
 
-class TrendingMovieDetailPage extends StatelessWidget {
-  const TrendingMovieDetailPage({super.key, required this.movie});
+class TrendingMovieDetailScreen extends StatelessWidget {
+  const TrendingMovieDetailScreen({super.key, required this.movie});
 
   final Movie movie;
 
