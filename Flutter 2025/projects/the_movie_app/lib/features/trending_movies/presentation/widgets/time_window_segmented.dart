@@ -31,10 +31,10 @@ class TimeWindowSegmented extends StatelessWidget {
           showSelectedIcon: false,
           style: const ButtonStyle(
             padding: WidgetStatePropertyAll<EdgeInsets>(
-              EdgeInsets.symmetric(horizontal: 18, vertical: 10),
+              EdgeInsets.symmetric(horizontal: 14, vertical: 8),
             ),
-            minimumSize: WidgetStatePropertyAll<Size>(Size(0, 40)),
-            visualDensity: VisualDensity(horizontal: -1, vertical: -2),
+            minimumSize: WidgetStatePropertyAll<Size>(Size(0, 36)),
+            visualDensity: VisualDensity(horizontal: -2, vertical: -4),
           ),
           onSelectionChanged: (Set<TimeWindow> set) {
             if (set.isEmpty) return;

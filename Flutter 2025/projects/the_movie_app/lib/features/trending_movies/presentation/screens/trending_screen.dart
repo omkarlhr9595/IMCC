@@ -69,7 +69,7 @@ class _TrendingScreenState extends State<TrendingScreen> {
                     SafeArea(
                       bottom: false,
                       child: Padding(
-                        padding: const EdgeInsets.fromLTRB(16, 16, 16, 8),
+                        padding: const EdgeInsets.fromLTRB(16, 8, 16, 4),
                         child: Column(
                           children: <Widget>[
                             TextField(
@@ -115,7 +115,7 @@ class _TrendingScreenState extends State<TrendingScreen> {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 8),
+                            const SizedBox(height: 6),
                             Row(
                               children: <Widget>[
                                 Expanded(
@@ -125,13 +125,13 @@ class _TrendingScreenState extends State<TrendingScreen> {
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
-                                const SizedBox(width: 12),
+                                const SizedBox(width: 8),
                                 if (_searchController.text.trim().isEmpty)
                                   Flexible(
                                     child: Align(
                                       alignment: Alignment.centerRight,
                                       child: ConstrainedBox(
-                                        constraints: const BoxConstraints(maxWidth: 280),
+                                        constraints: const BoxConstraints(maxWidth: 220),
                                         child: const TimeWindowSegmented(),
                                       ),
                                     ),
@@ -165,6 +165,7 @@ class _TrendingScreenState extends State<TrendingScreen> {
                                     child: Center(child: CircularProgressIndicator()),
                                   ),
                                   scrollController: _scrollController,
+                                  padding: EdgeInsets.zero,
                                   itemBuilder: (BuildContext context, int rowIndex) {
                                     final int leftIndex = rowIndex * 2;
                                     final int rightIndex = leftIndex + 1;
@@ -194,7 +195,7 @@ class _TrendingScreenState extends State<TrendingScreen> {
                                       ],
                                     );
                                   },
-                                  separatorBuilder: (context, index) => const SizedBox(height: 12),
+                                  separatorBuilder: (context, index) => const SizedBox(height: 8),
                                 ),
                               );
                             }
@@ -222,6 +223,7 @@ class _TrendingScreenState extends State<TrendingScreen> {
                                     child: Center(child: CircularProgressIndicator()),
                                   ),
                                   scrollController: _scrollController,
+                                  padding: EdgeInsets.zero,
                                   itemBuilder: (BuildContext context, int rowIndex) {
                                     final int leftIndex = rowIndex * 2;
                                     final int rightIndex = leftIndex + 1;
@@ -251,7 +253,7 @@ class _TrendingScreenState extends State<TrendingScreen> {
                                       ],
                                     );
                                   },
-                                  separatorBuilder: (context, index) => const SizedBox(height: 12),
+                                  separatorBuilder: (context, index) => const SizedBox(height: 8),
                                 ),
                               );
                             }
