@@ -1,10 +1,5 @@
-import 'package:json_annotation/json_annotation.dart';
-
 import '../../domain/entities/movie.dart';
 
-part 'movie_model.g.dart';
-
-@JsonSerializable(createToJson: false)
 class MovieModel {
   const MovieModel({
     required this.id,
@@ -16,33 +11,25 @@ class MovieModel {
     this.voteAverage,
   });
 
-  @JsonKey(name: 'id')
   final int id;
-
-  @JsonKey(readValue: _readTitle)
   final String title;
-
-  @JsonKey(name: 'overview')
   final String overview;
-
-  @JsonKey(name: 'poster_path')
   final String? posterPath;
-
-  @JsonKey(name: 'backdrop_path')
   final String? backdropPath;
-
-  @JsonKey(readValue: _readReleaseDate)
   final String? releaseDate;
-
-  @JsonKey(name: 'vote_average')
   final double? voteAverage;
 
-  factory MovieModel.fromJson(Map<String, dynamic> json) => _$MovieModelFromJson(json);
-
-  static Object? _readTitle(Map json, String key) => (json['title'] ?? json['name'] ?? '').toString();
-
-  static Object? _readReleaseDate(Map json, String key) =>
-      (json['release_date'] ?? json['first_air_date'])?.toString();
+  factory MovieModel.fromJson(Map<String, dynamic> json) {
+    return MovieModel(
+      id: json['id'] as int,
+      title: (json['title'] ?? json['original_title'] ?? json['name'] ?? json['original_name'] ?? '') as String,
+      overview: (json['overview'] ?? '') as String,
+      posterPath: json['poster_path'] as String?,
+      backdropPath: json['backdrop_path'] as String?,
+      releaseDate: (json['release_date'] ?? json['first_air_date']) as String?,
+      voteAverage: json['vote_average'] == null ? null : (json['vote_average'] as num).toDouble(),
+    );
+  }
 
   Movie toEntity() => Movie(
         id: id,
@@ -54,4 +41,3 @@ class MovieModel {
         voteAverage: voteAverage,
       );
 }
-

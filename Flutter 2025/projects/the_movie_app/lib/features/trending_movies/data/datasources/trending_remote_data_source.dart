@@ -20,11 +20,8 @@ class TrendingRemoteDataSourceImpl implements TrendingRemoteDataSource {
     try {
       final Response<dynamic> response = await _client.dio.get(path);
       if (response.statusCode == 200 && response.data is Map<String, dynamic>) {
-        final List<dynamic> results = (response.data as Map<String, dynamic>)['results'] as List<dynamic>? ?? <dynamic>[];
-        final List<MovieModel> models = results
-            .whereType<Map<String, dynamic>>()
-            .map<MovieModel>((Map<String, dynamic> e) => MovieModel.fromJson(e))
-            .toList(growable: false);
+        final List<dynamic> results = (response.data as Map<String, dynamic>)['results'] as List<dynamic>; 
+        final List<MovieModel> models = results.map((e) => MovieModel.fromJson(e)).toList();
         
         return models;
       }
