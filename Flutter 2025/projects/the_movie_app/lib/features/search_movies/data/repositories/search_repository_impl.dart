@@ -19,7 +19,15 @@ class SearchRepositoryImpl implements SearchRepository {
       final List<MovieModel>? cached = forceRefresh ? null : await local.getCachedSearchResults(query, page);
       final List<MovieModel> models = cached ?? await remote.searchMovies(query: query, page: page);
       final List<Movie> movies = models.map((MovieModel m) => m.toEntity()).toList(growable: false);
-      return Success<List<Movie>>(movies);
+      
+      // Remove duplicates based on movie ID to prevent Hero tag conflicts
+      final Map<int, Movie> uniqueMovies = <int, Movie>{};
+      for (final Movie movie in movies) {
+        uniqueMovies[movie.id] = movie;
+      }
+      final List<Movie> deduplicatedMovies = uniqueMovies.values.toList(growable: false);
+      
+      return Success<List<Movie>>(deduplicatedMovies);
     } on ServerException catch (e) {
       return FailureResult<List<Movie>>(ServerFailure(e.message, statusCode: e.statusCode));
     } on NetworkException catch (e) {

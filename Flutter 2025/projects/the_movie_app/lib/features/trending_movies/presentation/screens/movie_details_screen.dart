@@ -64,7 +64,7 @@ class MovieDetailsScreen extends StatelessWidget {
                         ClipRRect(
                           borderRadius: BorderRadius.circular(8),
                           child: Hero(
-                            tag: 'poster_${movie.id}',
+                            tag: 'poster_${movie.id}_${movie.hashCode}',
                             child: GestureDetector(
                               onTap: () {
                                 Navigator.of(context).push(PageRouteBuilder(
@@ -90,7 +90,7 @@ class MovieDetailsScreen extends StatelessWidget {
                                             maxHeight: maxH,
                                           ),
                                           child: Hero(
-                                            tag: 'poster_${movie.id}',
+                                            tag: 'poster_${movie.id}_${movie.hashCode}',
                                             child: InteractiveViewer(
                                               minScale: 0.5,
                                               maxScale: 5,

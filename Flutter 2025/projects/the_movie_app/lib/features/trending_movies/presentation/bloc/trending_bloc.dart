@@ -85,7 +85,21 @@ class TrendingBloc extends Bloc<TrendingEvent, TrendingState> {
       final Result<List<Movie>> result = await _getTrendingMovies(GetTrendingMoviesParams(timeWindow: current.timeWindow, page: nextPage));
       result.when(
         success: (List<Movie> movies) {
-          final List<Movie> combined = List<Movie>.of(current.movies)..addAll(movies);
+          // Combine movies and remove duplicates to prevent Hero tag conflicts
+          final Map<int, Movie> uniqueMovies = <int, Movie>{};
+          
+          // Add current movies first (preserving order)
+          for (final Movie movie in current.movies) {
+            uniqueMovies[movie.id] = movie;
+          }
+          
+          // Add new movies (newer ones will override if same ID)
+          for (final Movie movie in movies) {
+            uniqueMovies[movie.id] = movie;
+          }
+          
+          final List<Movie> combined = uniqueMovies.values.toList(growable: false);
+          
           emit(TrendingSuccessState(
             movies: combined,
             timeWindow: current.timeWindow,

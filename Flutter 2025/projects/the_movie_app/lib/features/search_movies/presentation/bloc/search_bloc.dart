@@ -52,8 +52,23 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
       final result = await _searchMovies(SearchMoviesParams(query: current.query, page: nextPage));
       result.when(
         success: (movies) {
+          // Combine movies and remove duplicates to prevent Hero tag conflicts
+          final Map<int, Movie> uniqueMovies = <int, Movie>{};
+          
+          // Add current movies first (preserving order)
+          for (final Movie movie in current.movies) {
+            uniqueMovies[movie.id] = movie;
+          }
+          
+          // Add new movies (newer ones will override if same ID)
+          for (final Movie movie in movies) {
+            uniqueMovies[movie.id] = movie;
+          }
+          
+          final List<Movie> combined = uniqueMovies.values.toList(growable: false);
+          
           emit(current.copyWith(
-            movies: List<Movie>.of(current.movies)..addAll(movies),
+            movies: combined,
             page: nextPage,
             hasReachedMax: movies.isEmpty,
             isLoadingMore: false,

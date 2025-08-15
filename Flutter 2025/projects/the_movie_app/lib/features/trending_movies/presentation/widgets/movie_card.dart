@@ -14,6 +14,9 @@ class MovieCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final String? imageUrl = movie.posterPath == null ? null : (ApiConfig.imageBaseUrlW500 + movie.posterPath!);
+    // Create a unique Hero tag using movie ID and a hash of the movie object to prevent conflicts
+    final String heroTag = 'poster_${movie.id}_${movie.hashCode}';
+    
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
       child: Material(
@@ -26,7 +29,7 @@ class MovieCard extends StatelessWidget {
                 child: imageUrl == null
                     ? Container(color: Colors.grey.shade300)
                     : Hero(
-                        tag: 'poster_${movie.id}',
+                        tag: heroTag,
                         child: CachedNetworkImage(
                           imageUrl: imageUrl,
                           fit: BoxFit.cover,
