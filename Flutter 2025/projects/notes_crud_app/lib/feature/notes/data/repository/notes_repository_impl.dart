@@ -1,45 +1,39 @@
 import 'package:notes_crud_app/feature/notes/data/datasource/firebase_notes_datasource.dart';
 import 'package:notes_crud_app/feature/notes/data/models/note_model.dart';
-
-abstract class NotesRepository {
-  Future<List<NoteModel>> getNotes();
-  Future<NoteModel?> getNoteById(String id);
-  Future<String> createNote(NoteModel note);
-  Future<void> updateNote(NoteModel note);
-  Future<void> deleteNote(String id);
-  Future<List<NoteModel>> searchNotes(String query);
-  Future<List<NoteModel>> getNotesByTag(String tag);
-}
+import 'package:notes_crud_app/feature/notes/domain/domain.dart';
 
 class NotesRepositoryImpl implements NotesRepository {
   final NotesDataSource _dataSource;
 
-  NotesRepositoryImpl({NotesDataSource? dataSource})
-      : _dataSource = dataSource ?? FirebaseNotesDataSource();
+  NotesRepositoryImpl({NotesDataSource? dataSource}) : _dataSource = dataSource ?? FirebaseNotesDataSource();
 
   @override
-  Future<List<NoteModel>> getNotes() async {
-    return await _dataSource.getNotes();
+  Future<List<Note>> getNotes() async {
+    final noteModels = await _dataSource.getNotes();
+    return noteModels.map((model) => _mapToEntity(model)).toList();
   }
 
   @override
-  Future<NoteModel?> getNoteById(String id) async {
-    return await _dataSource.getNoteById(id);
+  Future<Note?> getNoteById(String id) async {
+    final noteModel = await _dataSource.getNoteById(id);
+    return noteModel != null ? _mapToEntity(noteModel) : null;
   }
 
   @override
-  Future<String> createNote(NoteModel note) async {
+  Future<String> createNote(Note note) async {
     final now = DateTime.now();
     final noteWithTimestamps = note.copyWith(
       createdAt: now,
       updatedAt: now,
     );
-    return await _dataSource.createNote(noteWithTimestamps);
+    final noteModel = _mapToModel(noteWithTimestamps);
+    return await _dataSource.createNote(noteModel);
   }
 
   @override
-  Future<void> updateNote(NoteModel note) async {
-    await _dataSource.updateNote(note);
+  Future<void> updateNote(Note note) async {
+    final noteModel = _mapToModel(note);
+    await _dataSource.updateNote(noteModel);
   }
 
   @override
@@ -48,14 +42,39 @@ class NotesRepositoryImpl implements NotesRepository {
   }
 
   @override
-  Future<List<NoteModel>> searchNotes(String query) async {
-    return await _dataSource.searchNotes(query);
+  Future<List<Note>> searchNotes(String query) async {
+    final noteModels = await _dataSource.searchNotes(query);
+    return noteModels.map((model) => _mapToEntity(model)).toList();
   }
 
   @override
-  Future<List<NoteModel>> getNotesByTag(String tag) async {
-    return await _dataSource.getNotesByTag(tag);
+  Future<List<Note>> getNotesByTag(String tag) async {
+    final noteModels = await _dataSource.getNotesByTag(tag);
+    return noteModels.map((model) => _mapToEntity(model)).toList();
   }
 
+  // Mapper methods
+  Note _mapToEntity(NoteModel model) {
+    return Note(
+      id: model.id,
+      title: model.title,
+      content: model.content,
+      createdAt: model.createdAt,
+      updatedAt: model.updatedAt,
+      isPinned: model.isPinned,
+      tags: model.tags,
+    );
+  }
 
-} 
+  NoteModel _mapToModel(Note entity) {
+    return NoteModel(
+      id: entity.id,
+      title: entity.title,
+      content: entity.content,
+      createdAt: entity.createdAt,
+      updatedAt: entity.updatedAt,
+      isPinned: entity.isPinned,
+      tags: entity.tags,
+    );
+  }
+}

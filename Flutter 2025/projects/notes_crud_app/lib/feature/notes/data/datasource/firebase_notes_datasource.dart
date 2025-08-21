@@ -23,13 +23,23 @@ class FirebaseNotesDataSource implements NotesDataSource {
     try {
       final querySnapshot = await _firestore
           .collection(_collectionName)
-          .orderBy('isPinned', descending: true)
           .orderBy('updatedAt', descending: true)
           .get();
 
-      return querySnapshot.docs
+      // Sort by pinned status in memory after fetching
+      final notes = querySnapshot.docs
           .map((doc) => NoteModel.fromFirestore(doc))
           .toList();
+      
+      // Sort: pinned first, then by updatedAt
+      notes.sort((a, b) {
+        if (a.isPinned != b.isPinned) {
+          return b.isPinned ? 1 : -1;
+        }
+        return b.updatedAt.compareTo(a.updatedAt);
+      });
+      
+      return notes;
     } catch (e) {
       throw Exception('Failed to fetch notes: $e');
     }
@@ -103,17 +113,35 @@ class FirebaseNotesDataSource implements NotesDataSource {
         return await getNotes();
       }
 
+      // Use a simpler query that doesn't require composite indexes
       final querySnapshot = await _firestore
           .collection(_collectionName)
-          .where('title', isGreaterThanOrEqualTo: query)
-          .where('title', isLessThan: query + '\uf8ff')
-          .orderBy('title')
-          .orderBy('updatedAt', descending: true)
           .get();
 
-      return querySnapshot.docs
+      // Filter and search in memory
+      final allNotes = querySnapshot.docs
           .map((doc) => NoteModel.fromFirestore(doc))
           .toList();
+
+      // Search in title and content
+      final filteredNotes = allNotes.where((note) {
+        final titleMatch = note.title.toLowerCase().contains(query.toLowerCase());
+        final contentMatch = note.content.toLowerCase().contains(query.toLowerCase());
+        return titleMatch || contentMatch;
+      }).toList();
+
+      // Sort by relevance (title matches first) then by updatedAt
+      filteredNotes.sort((a, b) {
+        final aTitleMatch = a.title.toLowerCase().contains(query.toLowerCase());
+        final bTitleMatch = b.title.toLowerCase().contains(query.toLowerCase());
+        
+        if (aTitleMatch != bTitleMatch) {
+          return aTitleMatch ? -1 : 1;
+        }
+        return b.updatedAt.compareTo(a.updatedAt);
+      });
+
+      return filteredNotes;
     } catch (e) {
       throw Exception('Failed to search notes: $e');
     }
@@ -125,12 +153,15 @@ class FirebaseNotesDataSource implements NotesDataSource {
       final querySnapshot = await _firestore
           .collection(_collectionName)
           .where('tags', arrayContains: tag)
-          .orderBy('updatedAt', descending: true)
           .get();
 
-      return querySnapshot.docs
+      // Sort by updatedAt in memory after fetching
+      final notes = querySnapshot.docs
           .map((doc) => NoteModel.fromFirestore(doc))
           .toList();
+      
+      notes.sort((a, b) => b.updatedAt.compareTo(a.updatedAt));
+      return notes;
     } catch (e) {
       throw Exception('Failed to fetch notes by tag: $e');
     }
