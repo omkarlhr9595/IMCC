@@ -1,3 +1,5 @@
-# notes_crud_app
+npm i -g firebase-tools
 
-A new Flutter project.
+dart pub global activate flutterfire_cli
+
+flutterfire configure --project=YOUR_PROJECT_ID
