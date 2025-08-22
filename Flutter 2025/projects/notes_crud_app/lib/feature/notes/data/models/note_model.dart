@@ -4,6 +4,8 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'note_model.g.dart';
 
+//dart run build_runner build
+
 @JsonSerializable()
 class NoteModel extends Equatable {
   final String? id;
