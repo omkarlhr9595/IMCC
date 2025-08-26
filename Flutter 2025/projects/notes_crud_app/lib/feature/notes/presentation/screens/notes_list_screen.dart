@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_crud_app/feature/notes/presentation/bloc/notes_bloc.dart';
 import 'package:notes_crud_app/feature/notes/presentation/widgets/note_card.dart';
 import 'package:notes_crud_app/feature/notes/presentation/widgets/add_note_fab.dart';
-import 'package:notes_crud_app/feature/notes/presentation/widgets/search_bar_widget.dart';
 
 class NotesListScreen extends StatefulWidget {
   const NotesListScreen({super.key});
@@ -32,7 +31,6 @@ class _NotesListScreenState extends State<NotesListScreen> {
       ),
       body: Column(
         children: [
-          const SearchBarWidget(),
           Expanded(
             child: BlocBuilder<NotesBloc, NotesState>(
               builder: (context, state) {
@@ -41,13 +39,13 @@ class _NotesListScreenState extends State<NotesListScreen> {
                     child: Text('No notes yet. Create your first note!'),
                   );
                 }
-                
+
                 if (state is NotesLoading) {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
-                
+
                 if (state is NotesError) {
                   return Center(
                     child: Column(
@@ -75,7 +73,7 @@ class _NotesListScreenState extends State<NotesListScreen> {
                     ),
                   );
                 }
-                
+
                 if (state is NotesLoaded) {
                   if (state.notes.isEmpty) {
                     return const Center(
@@ -107,7 +105,7 @@ class _NotesListScreenState extends State<NotesListScreen> {
                       ),
                     );
                   }
-                  
+
                   return ListView.builder(
                     padding: const EdgeInsets.all(16),
                     itemCount: state.notes.length,
@@ -120,7 +118,7 @@ class _NotesListScreenState extends State<NotesListScreen> {
                     },
                   );
                 }
-                
+
                 return const Center(
                   child: Text('Unknown state'),
                 );
@@ -132,4 +130,4 @@ class _NotesListScreenState extends State<NotesListScreen> {
       floatingActionButton: const AddNoteFab(),
     );
   }
-} 
+}

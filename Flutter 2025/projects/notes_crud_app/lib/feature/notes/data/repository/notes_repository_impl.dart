@@ -41,18 +41,6 @@ class NotesRepositoryImpl implements NotesRepository {
     await _dataSource.deleteNote(id);
   }
 
-  @override
-  Future<List<Note>> searchNotes(String query) async {
-    final noteModels = await _dataSource.searchNotes(query);
-    return noteModels.map((model) => _mapToEntity(model)).toList();
-  }
-
-  @override
-  Future<List<Note>> getNotesByTag(String tag) async {
-    final noteModels = await _dataSource.getNotesByTag(tag);
-    return noteModels.map((model) => _mapToEntity(model)).toList();
-  }
-
   // Mapper methods
   Note _mapToEntity(NoteModel model) {
     return Note(
@@ -62,7 +50,6 @@ class NotesRepositoryImpl implements NotesRepository {
       createdAt: model.createdAt,
       updatedAt: model.updatedAt,
       isPinned: model.isPinned,
-      tags: model.tags,
     );
   }
 
@@ -74,7 +61,6 @@ class NotesRepositoryImpl implements NotesRepository {
       createdAt: entity.createdAt,
       updatedAt: entity.updatedAt,
       isPinned: entity.isPinned,
-      tags: entity.tags,
     );
   }
 }

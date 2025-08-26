@@ -4,7 +4,6 @@ import 'package:notes_crud_app/feature/notes/data/data.dart';
 import 'package:notes_crud_app/feature/notes/domain/usecases/create_note.dart';
 import 'package:notes_crud_app/feature/notes/domain/usecases/delete_note.dart';
 import 'package:notes_crud_app/feature/notes/domain/usecases/get_notes.dart';
-import 'package:notes_crud_app/feature/notes/domain/usecases/search_notes.dart';
 import 'package:notes_crud_app/feature/notes/domain/usecases/update_note.dart';
 import 'package:notes_crud_app/feature/notes/domain/domain.dart';
 
@@ -29,5 +28,4 @@ Future<void> init() async {
   sl.registerLazySingleton(() => CreateNote(sl()));
   sl.registerLazySingleton(() => UpdateNote(sl()));
   sl.registerLazySingleton(() => DeleteNote(sl()));
-  sl.registerLazySingleton(() => SearchNotes(sl()));
 }

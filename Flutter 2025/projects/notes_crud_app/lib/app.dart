@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:notes_crud_app/feature/notes/domain/domain.dart';
 import 'package:notes_crud_app/feature/notes/domain/usecases/create_note.dart' as create_note;
 import 'package:notes_crud_app/feature/notes/domain/usecases/delete_note.dart' as delete_note;
 import 'package:notes_crud_app/feature/notes/domain/usecases/get_notes.dart' as get_notes;
-import 'package:notes_crud_app/feature/notes/domain/usecases/search_notes.dart' as search_notes;
 import 'package:notes_crud_app/feature/notes/domain/usecases/update_note.dart' as update_note;
 import 'package:notes_crud_app/feature/notes/presentation/presentation.dart';
 import 'package:notes_crud_app/injection_container.dart' as di;
@@ -34,7 +31,6 @@ class _MyNotesAppState extends State<MyNotesApp> {
             createNoteUseCase: di.sl<create_note.CreateNote>(),
             updateNoteUseCase: di.sl<update_note.UpdateNote>(),
             deleteNoteUseCase: di.sl<delete_note.DeleteNote>(),
-            searchNotesUseCase: di.sl<search_notes.SearchNotes>(),
           ),
         ),
       ],
@@ -92,8 +88,8 @@ class _MyNotesAppState extends State<MyNotesApp> {
         home: const NotesListScreen(),
         routes: {
           '/note-detail': (context) => NoteDetailScreen.fromArguments(
-            ModalRoute.of(context)?.settings.arguments,
-          ),
+                ModalRoute.of(context)?.settings.arguments,
+              ),
         },
       ),
     );

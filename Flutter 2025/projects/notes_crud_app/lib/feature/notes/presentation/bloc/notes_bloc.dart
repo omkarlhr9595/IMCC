@@ -5,7 +5,6 @@ import 'package:notes_crud_app/feature/notes/domain/entities/note.dart';
 import 'package:notes_crud_app/feature/notes/domain/usecases/create_note.dart' as create_note;
 import 'package:notes_crud_app/feature/notes/domain/usecases/delete_note.dart' as delete_note;
 import 'package:notes_crud_app/feature/notes/domain/usecases/get_notes.dart' as get_notes;
-import 'package:notes_crud_app/feature/notes/domain/usecases/search_notes.dart' as search_notes;
 import 'package:notes_crud_app/feature/notes/domain/usecases/update_note.dart' as update_note;
 
 part 'notes_event.dart';
@@ -16,32 +15,28 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
   final create_note.CreateNote _createNoteUseCase;
   final update_note.UpdateNote _updateNoteUseCase;
   final delete_note.DeleteNote _deleteNoteUseCase;
-  final search_notes.SearchNotes _searchNotesUseCase;
 
   NotesBloc({
     required get_notes.GetNotes getNotesUseCase,
     required create_note.CreateNote createNoteUseCase,
     required update_note.UpdateNote updateNoteUseCase,
     required delete_note.DeleteNote deleteNoteUseCase,
-    required search_notes.SearchNotes searchNotesUseCase,
   })  : _getNotesUseCase = getNotesUseCase,
         _createNoteUseCase = createNoteUseCase,
         _updateNoteUseCase = updateNoteUseCase,
         _deleteNoteUseCase = deleteNoteUseCase,
-        _searchNotesUseCase = searchNotesUseCase,
         super(NotesInitial()) {
     on<LoadNotes>(_onLoadNotes);
     on<CreateNote>(_onCreateNote);
     on<UpdateNote>(_onUpdateNote);
     on<DeleteNote>(_onDeleteNote);
-    on<SearchNotes>(_onSearchNotes);
     on<ToggleNotePin>(_onToggleNotePin);
   }
 
   Future<void> _onLoadNotes(LoadNotes event, Emitter<NotesState> emit) async {
     emit(NotesLoading());
     try {
-      final result = await _getNotesUseCase(NoParams());
+      final result = await _getNotesUseCase(const NoParams());
       result.when(
         success: (notes) => emit(NotesLoaded(notes)),
         failure: (failure) => emit(NotesError(failure.message)),
@@ -60,7 +55,7 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
         updatedAt: DateTime.now(),
         tags: event.tags,
       );
-      
+
       final result = await _createNoteUseCase(note);
       result.when(
         success: (noteId) {
@@ -83,7 +78,7 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
       final updatedNote = event.note.copyWith(
         updatedAt: DateTime.now(),
       );
-      
+
       final result = await _updateNoteUseCase(updatedNote);
       result.when(
         success: (_) {
@@ -120,24 +115,6 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
     }
   }
 
-  Future<void> _onSearchNotes(SearchNotes event, Emitter<NotesState> emit) async {
-    if (event.query.isEmpty) {
-      add(LoadNotes());
-      return;
-    }
-    
-    emit(NotesLoading());
-    try {
-      final result = await _searchNotesUseCase(event.query);
-      result.when(
-        success: (notes) => emit(NotesLoaded(notes)),
-        failure: (failure) => emit(NotesError(failure.message)),
-      );
-    } catch (e) {
-      emit(NotesError(e.toString()));
-    }
-  }
-
   Future<void> _onToggleNotePin(ToggleNotePin event, Emitter<NotesState> emit) async {
     try {
       if (state is NotesLoaded) {
@@ -147,14 +124,14 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
           isPinned: event.isPinned,
           updatedAt: DateTime.now(),
         );
-        
+
         final result = await _updateNoteUseCase(updatedNote);
         result.when(
           success: (_) {
             final updatedNotes = currentNotes.map((note) {
               return note.id == event.noteId ? updatedNote : note;
             }).toList();
-            
+
             // Sort notes: pinned first, then by updatedAt
             updatedNotes.sort((a, b) {
               if (a.isPinned != b.isPinned) {
@@ -162,7 +139,7 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
               }
               return b.updatedAt.compareTo(a.updatedAt);
             });
-            
+
             emit(NotesLoaded(updatedNotes));
           },
           failure: (failure) => emit(NotesError(failure.message)),

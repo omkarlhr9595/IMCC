@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:notes_crud_app/feature/notes/domain/domain.dart';
 import 'package:notes_crud_app/feature/notes/presentation/bloc/notes_bloc.dart';
-import 'package:notes_crud_app/feature/notes/presentation/screens/note_detail_screen.dart';
 
 class NoteCard extends StatelessWidget {
   final Note note;
@@ -13,9 +12,7 @@ class NoteCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: note.isPinned ? 4 : 2,
-      color: note.isPinned 
-          ? Theme.of(context).colorScheme.primaryContainer
-          : Theme.of(context).colorScheme.surface,
+      color: note.isPinned ? Theme.of(context).colorScheme.primaryContainer : Theme.of(context).colorScheme.surface,
       child: InkWell(
         onTap: () {
           Navigator.of(context).pushNamed('/note-detail', arguments: note);
@@ -35,8 +32,7 @@ class NoteCard extends StatelessWidget {
                       color: Colors.orange,
                       size: 20,
                     ),
-                  if (note.isPinned)
-                    const SizedBox(width: 8),
+                  if (note.isPinned) const SizedBox(width: 8),
                   Expanded(
                     child: Text(
                       note.title,
@@ -51,11 +47,11 @@ class NoteCard extends StatelessWidget {
                   IconButton(
                     onPressed: () {
                       context.read<NotesBloc>().add(
-                        ToggleNotePin(
-                          noteId: note.id!,
-                          isPinned: !note.isPinned,
-                        ),
-                      );
+                            ToggleNotePin(
+                              noteId: note.id!,
+                              isPinned: !note.isPinned,
+                            ),
+                          );
                     },
                     icon: Icon(
                       note.isPinned ? Icons.push_pin : Icons.push_pin_outlined,
@@ -65,9 +61,9 @@ class NoteCard extends StatelessWidget {
                   ),
                 ],
               ),
-              
+
               const SizedBox(height: 8),
-              
+
               // Content preview
               Text(
                 note.content,
@@ -78,9 +74,9 @@ class NoteCard extends StatelessWidget {
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
               ),
-              
+
               const SizedBox(height: 12),
-              
+
               // Tags
               if (note.tags.isNotEmpty) ...[
                 Wrap(
@@ -108,7 +104,7 @@ class NoteCard extends StatelessWidget {
                 ),
                 const SizedBox(height: 8),
               ],
-              
+
               // Footer with date
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -165,4 +161,4 @@ class NoteCard extends StatelessWidget {
       return '${date.day}/${date.month}/${date.year}';
     }
   }
-} 
+}

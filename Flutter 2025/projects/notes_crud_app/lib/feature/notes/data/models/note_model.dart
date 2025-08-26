@@ -14,7 +14,6 @@ class NoteModel extends Equatable {
   final DateTime createdAt;
   final DateTime updatedAt;
   final bool isPinned;
-  final List<String> tags;
 
   const NoteModel({
     this.id,
@@ -23,7 +22,6 @@ class NoteModel extends Equatable {
     required this.createdAt,
     required this.updatedAt,
     this.isPinned = false,
-    this.tags = const [],
   });
 
   // Factory method for creating a new note
@@ -38,7 +36,6 @@ class NoteModel extends Equatable {
       content: content,
       createdAt: now,
       updatedAt: now,
-      tags: tags,
     );
   }
 
@@ -55,7 +52,6 @@ class NoteModel extends Equatable {
       createdAt: (data['createdAt'] as Timestamp).toDate(),
       updatedAt: (data['updatedAt'] as Timestamp).toDate(),
       isPinned: data['isPinned'] ?? false,
-      tags: List<String>.from(data['tags'] ?? []),
     );
   }
 
@@ -66,7 +62,6 @@ class NoteModel extends Equatable {
       'createdAt': Timestamp.fromDate(createdAt),
       'updatedAt': Timestamp.fromDate(updatedAt),
       'isPinned': isPinned,
-      'tags': tags,
     };
   }
 
@@ -86,15 +81,14 @@ class NoteModel extends Equatable {
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       isPinned: isPinned ?? this.isPinned,
-      tags: tags ?? this.tags,
     );
   }
 
   @override
-  List<Object?> get props => [id, title, content, createdAt, updatedAt, isPinned, tags];
+  List<Object?> get props => [id, title, content, createdAt, updatedAt, isPinned];
 
   @override
   String toString() {
-    return 'NoteModel(id: $id, title: $title, content: $content, createdAt: $createdAt, updatedAt: $updatedAt, isPinned: $isPinned, tags: $tags)';
+    return 'NoteModel(id: $id, title: $title, content: $content, createdAt: $createdAt, updatedAt: $updatedAt, isPinned: $isPinned)';
   }
-} 
+}
