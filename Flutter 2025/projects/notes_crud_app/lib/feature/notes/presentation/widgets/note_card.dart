@@ -77,34 +77,6 @@ class NoteCard extends StatelessWidget {
 
               const SizedBox(height: 12),
 
-              // Tags
-              if (note.tags.isNotEmpty) ...[
-                Wrap(
-                  spacing: 4,
-                  runSpacing: 4,
-                  children: note.tags.map((tag) {
-                    return Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 8,
-                        vertical: 4,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.secondaryContainer,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      child: Text(
-                        tag,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Theme.of(context).colorScheme.onSecondaryContainer,
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                ),
-                const SizedBox(height: 8),
-              ],
-
               // Footer with date
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

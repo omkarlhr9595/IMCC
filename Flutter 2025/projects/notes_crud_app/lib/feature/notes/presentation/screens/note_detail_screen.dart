@@ -31,7 +31,6 @@ class _NoteDetailScreenState extends State<NoteDetailScreen> {
     super.initState();
     _titleController = TextEditingController(text: widget.note?.title ?? '');
     _contentController = TextEditingController(text: widget.note?.content ?? '');
-    _tags = List.from(widget.note?.tags ?? []);
     _isEditing = widget.note == null;
   }
 
@@ -65,18 +64,16 @@ class _NoteDetailScreenState extends State<NoteDetailScreen> {
     if (widget.note == null) {
       // Create new note
       context.read<NotesBloc>().add(
-        CreateNote(
-          title: title,
-          content: content,
-          tags: _tags,
-        ),
-      );
+            CreateNote(
+              title: title,
+              content: content,
+            ),
+          );
     } else {
       // Update existing note
       final updatedNote = widget.note!.copyWith(
         title: title,
         content: content,
-        tags: _tags,
         updatedAt: DateTime.now(),
       );
       context.read<NotesBloc>().add(UpdateNote(updatedNote));
@@ -197,7 +194,7 @@ class _NoteDetailScreenState extends State<NoteDetailScreen> {
               ),
             ),
             const SizedBox(height: 16),
-            
+
             // Tags section
             if (_isEditing || _tags.isNotEmpty) ...[
               Row(
@@ -228,7 +225,7 @@ class _NoteDetailScreenState extends State<NoteDetailScreen> {
               ),
               const SizedBox(height: 16),
             ],
-            
+
             // Content field
             Expanded(
               child: TextField(
@@ -244,7 +241,7 @@ class _NoteDetailScreenState extends State<NoteDetailScreen> {
                 ),
               ),
             ),
-            
+
             // Save button
             if (_isEditing) ...[
               const SizedBox(height: 16),
@@ -264,4 +261,4 @@ class _NoteDetailScreenState extends State<NoteDetailScreen> {
       ),
     );
   }
-} 
+}

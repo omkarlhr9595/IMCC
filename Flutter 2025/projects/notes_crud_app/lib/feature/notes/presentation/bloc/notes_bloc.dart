@@ -53,7 +53,6 @@ class NotesBloc extends Bloc<NotesEvent, NotesState> {
         content: event.content,
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
-        tags: event.tags,
       );
 
       final result = await _createNoteUseCase(note);

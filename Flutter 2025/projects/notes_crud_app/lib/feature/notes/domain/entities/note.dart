@@ -7,7 +7,6 @@ class Note extends Equatable {
   final DateTime createdAt;
   final DateTime updatedAt;
   final bool isPinned;
-  final List<String> tags;
 
   const Note({
     this.id,
@@ -16,7 +15,6 @@ class Note extends Equatable {
     required this.createdAt,
     required this.updatedAt,
     this.isPinned = false,
-    this.tags = const [],
   });
 
   Note copyWith({
@@ -26,7 +24,6 @@ class Note extends Equatable {
     DateTime? createdAt,
     DateTime? updatedAt,
     bool? isPinned,
-    List<String>? tags,
   }) {
     return Note(
       id: id ?? this.id,
@@ -35,10 +32,9 @@ class Note extends Equatable {
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       isPinned: isPinned ?? this.isPinned,
-      tags: tags ?? this.tags,
     );
   }
 
   @override
-  List<Object?> get props => [id, title, content, createdAt, updatedAt, isPinned, tags];
+  List<Object?> get props => [id, title, content, createdAt, updatedAt, isPinned];
 } 

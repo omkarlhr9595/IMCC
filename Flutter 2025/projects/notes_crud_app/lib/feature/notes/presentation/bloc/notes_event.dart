@@ -12,16 +12,14 @@ class LoadNotes extends NotesEvent {}
 class CreateNote extends NotesEvent {
   final String title;
   final String content;
-  final List<String> tags;
 
   const CreateNote({
     required this.title,
     required this.content,
-    this.tags = const [],
   });
 
   @override
-  List<Object> get props => [title, content, tags];
+  List<Object> get props => [title, content];
 }
 
 class UpdateNote extends NotesEvent {
