@@ -23,7 +23,6 @@ class NoteDetailScreen extends StatefulWidget {
 class _NoteDetailScreenState extends State<NoteDetailScreen> {
   late TextEditingController _titleController;
   late TextEditingController _contentController;
-  late List<String> _tags;
   bool _isEditing = false;
 
   @override
@@ -109,50 +108,6 @@ class _NoteDetailScreenState extends State<NoteDetailScreen> {
     }
   }
 
-  void _addTag() {
-    showDialog(
-      context: context,
-      builder: (context) {
-        final tagController = TextEditingController();
-        return AlertDialog(
-          title: const Text('Add Tag'),
-          content: TextField(
-            controller: tagController,
-            decoration: const InputDecoration(
-              labelText: 'Tag',
-              hintText: 'Enter tag name',
-            ),
-            autofocus: true,
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                final tag = tagController.text.trim();
-                if (tag.isNotEmpty && !_tags.contains(tag)) {
-                  setState(() {
-                    _tags.add(tag);
-                  });
-                }
-                Navigator.of(context).pop();
-              },
-              child: const Text('Add'),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  void _removeTag(String tag) {
-    setState(() {
-      _tags.remove(tag);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final isNewNote = widget.note == null;
@@ -194,37 +149,6 @@ class _NoteDetailScreenState extends State<NoteDetailScreen> {
               ),
             ),
             const SizedBox(height: 16),
-
-            // Tags section
-            if (_isEditing || _tags.isNotEmpty) ...[
-              Row(
-                children: [
-                  const Text(
-                    'Tags: ',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  Expanded(
-                    child: Wrap(
-                      spacing: 8,
-                      children: _tags.map((tag) {
-                        return Chip(
-                          label: Text(tag),
-                          onDeleted: _isEditing ? () => _removeTag(tag) : null,
-                          deleteIcon: _isEditing ? const Icon(Icons.close, size: 18) : null,
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                  if (_isEditing)
-                    IconButton(
-                      onPressed: _addTag,
-                      icon: const Icon(Icons.add),
-                      tooltip: 'Add tag',
-                    ),
-                ],
-              ),
-              const SizedBox(height: 16),
-            ],
 
             // Content field
             Expanded(

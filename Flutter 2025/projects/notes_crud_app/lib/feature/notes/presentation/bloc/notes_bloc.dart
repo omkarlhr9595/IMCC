@@ -2,10 +2,10 @@ import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:notes_crud_app/core/usecases/usecase.dart';
 import 'package:notes_crud_app/feature/notes/domain/entities/note.dart';
-import 'package:notes_crud_app/feature/notes/domain/usecases/create_note.dart' as create_note;
-import 'package:notes_crud_app/feature/notes/domain/usecases/delete_note.dart' as delete_note;
 import 'package:notes_crud_app/feature/notes/domain/usecases/get_notes.dart' as get_notes;
+import 'package:notes_crud_app/feature/notes/domain/usecases/create_note.dart' as create_note;
 import 'package:notes_crud_app/feature/notes/domain/usecases/update_note.dart' as update_note;
+import 'package:notes_crud_app/feature/notes/domain/usecases/delete_note.dart' as delete_note;
 
 part 'notes_event.dart';
 part 'notes_state.dart';
