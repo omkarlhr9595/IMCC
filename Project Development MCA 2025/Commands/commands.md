@@ -26,3 +26,9 @@ To install nodemon pacakge gloablly
 ```bash
 npm i -g nodemon
 ```
+
+To install express package
+
+```bash
+npm install express --save
+```
