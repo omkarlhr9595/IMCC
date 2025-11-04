@@ -69,7 +69,7 @@ class NoteCard extends StatelessWidget {
                 note.content,
                 style: TextStyle(
                   fontSize: 14,
-                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.8),
+                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.8),
                 ),
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
@@ -85,7 +85,7 @@ class NoteCard extends StatelessWidget {
                     _formatDate(note.updatedAt),
                     style: TextStyle(
                       fontSize: 12,
-                      color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                      color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
                     ),
                   ),
                   if (note.isPinned)
@@ -95,7 +95,7 @@ class NoteCard extends StatelessWidget {
                         vertical: 4,
                       ),
                       decoration: BoxDecoration(
-                        color: Colors.orange.withOpacity(0.2),
+                        color: Colors.orange.withValues(alpha: 0.2),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: const Text(
