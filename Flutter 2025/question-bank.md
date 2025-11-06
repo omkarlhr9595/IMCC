@@ -1,7 +1,4 @@
-# Flutter & Clean Architecture - Extended Question Bank
-## 100 Additional Quiz Questions
-
----
+# Flutter & Clean Architecture Quiz Questions
 
 ## Module 1: Introduction to Flutter (Questions 1-15)
 
@@ -874,3 +871,540 @@
 
 **Correct Answer:** B  
 **Explanation:** CI/CD automates building, testing, and deploying applications, improving development workflow.
+
+---
+
+## Additional Questions: Introduction to Flutter (Questions 101-105)
+
+### Question 101 (Easy)
+**Question:** What is Flutter primarily used for?
+- A. Backend development only
+- B. Cross-platform mobile, web, and desktop application development
+- C. Database management
+- D. Machine learning model training
+
+**Correct Answer:** B  
+**Explanation:** Flutter is a UI toolkit for building natively compiled applications for mobile, web, and desktop from a single codebase.
+
+### Question 102 (Easy)
+**Question:** Which programming language does Flutter use?
+- A. JavaScript
+- B. Kotlin
+- C. Dart
+- D. Swift
+
+**Correct Answer:** C  
+**Explanation:** Flutter uses Dart, a client-optimized language developed by Google for fast apps on any platform.
+
+### Question 103 (Medium)
+**Question:** What command checks if your Flutter environment is properly set up?
+- A. flutter check
+- B. flutter doctor
+- C. flutter verify
+- D. flutter setup
+
+**Correct Answer:** B  
+**Explanation:** The 'flutter doctor' command checks your environment and displays a report of the status of your Flutter installation.
+
+### Question 104 (Medium)
+**Question:** What feature allows you to see changes instantly without restarting the app?
+- A. Live Reload
+- B. Hot Reload
+- C. Quick Refresh
+- D. Instant Update
+
+**Correct Answer:** B  
+**Explanation:** Hot Reload allows you to see changes instantly by injecting updated source code into the running Dart VM without losing app state.
+
+### Question 105 (Hard)
+**Question:** What is Dart's null safety feature designed to prevent?
+- A. Memory leaks
+- B. Null reference errors at runtime
+- C. Type casting errors
+- D. Infinite loops
+
+**Correct Answer:** B  
+**Explanation:** Dart's null safety helps developers avoid null reference errors by distinguishing between nullable and non-nullable types at compile time.
+
+---
+
+## Additional Questions: Widgets (Questions 106-110)
+
+### Question 106 (Easy)
+**Question:** What is the fundamental building block of Flutter UI?
+- A. Components
+- B. Views
+- C. Widgets
+- D. Elements
+
+**Correct Answer:** C  
+**Explanation:** Everything in Flutter is a widget. Widgets describe what their view should look like given their current configuration and state.
+
+### Question 107 (Easy)
+**Question:** Which widget is used for widgets that don't require mutable state?
+- A. StatefulWidget
+- B. StatelessWidget
+- C. DynamicWidget
+- D. ImmutableWidget
+
+**Correct Answer:** B  
+**Explanation:** StatelessWidget is used when the widget doesn't need to maintain any state that changes over time.
+
+### Question 108 (Medium)
+**Question:** Which widget arranges children vertically?
+- A. Row
+- B. Column
+- C. Stack
+- D. List
+
+**Correct Answer:** B  
+**Explanation:** Column widget displays its children in a vertical array, from top to bottom.
+
+### Question 109 (Medium)
+**Question:** What is the purpose of the MediaQuery widget?
+- A. Playing media files
+- B. Querying database
+- C. Getting device screen information for responsive design
+- D. Managing network requests
+
+**Correct Answer:** C  
+**Explanation:** MediaQuery provides information about the current device's screen size, orientation, and other properties for building responsive UIs.
+
+### Question 110 (Hard)
+**Question:** When should you use Keys in Flutter widgets?
+- A. Always, for every widget
+- B. Never, they're deprecated
+- C. When you need to preserve state of widgets in a list that can reorder
+- D. Only for StatelessWidgets
+
+**Correct Answer:** C  
+**Explanation:** Keys help Flutter identify which widgets have changed, been added, or removed, especially important for maintaining state in dynamic lists.
+
+---
+
+## Additional Questions: State Management (Questions 111-115)
+
+### Question 111 (Easy)
+**Question:** What method triggers a rebuild of a StatefulWidget?
+- A. rebuild()
+- B. setState()
+- C. update()
+- D. refresh()
+
+**Correct Answer:** B  
+**Explanation:** setState() notifies the framework that the internal state has changed, triggering a rebuild of the widget.
+
+### Question 112 (Medium)
+**Question:** What is the primary purpose of the Provider package?
+- A. Routing navigation
+- B. State management and dependency injection
+- C. API calls
+- D. Animation control
+
+**Correct Answer:** B  
+**Explanation:** Provider is a wrapper around InheritedWidget that makes state management and dependency injection easier and more scalable.
+
+### Question 113 (Medium)
+**Question:** In the BLoC pattern, what does BLoC stand for?
+- A. Basic Logic Operation Component
+- B. Business Logic Component
+- C. Block Object Controller
+- D. Binary Logic Code
+
+**Correct Answer:** B  
+**Explanation:** BLoC stands for Business Logic Component, a pattern that separates business logic from UI using streams.
+
+### Question 114 (Hard)
+**Question:** What is the difference between local and global state?
+- A. Local state is faster than global state
+- B. Local state is specific to a widget, global state is shared across the app
+- C. Global state cannot be changed
+- D. Local state requires Provider package
+
+**Correct Answer:** B  
+**Explanation:** Local state is managed within a single widget, while global state is shared and accessible across multiple widgets in the app.
+
+### Question 115 (Hard)
+**Question:** Which class should you extend when using Provider for state management?
+- A. StateNotifier
+- B. ChangeNotifier
+- C. StreamController
+- D. ValueNotifier
+
+**Correct Answer:** B  
+**Explanation:** ChangeNotifier is a simple class that provides change notification to its listeners, commonly used with Provider.
+
+---
+
+## Additional Questions: Navigation & Interaction (Questions 116-120)
+
+### Question 116 (Easy)
+**Question:** Which widget detects user gestures like taps and swipes?
+- A. TouchDetector
+- B. GestureDetector
+- C. InputListener
+- D. InteractionWidget
+
+**Correct Answer:** B  
+**Explanation:** GestureDetector is a widget that detects gestures and provides callbacks for various touch interactions.
+
+### Question 117 (Medium)
+**Question:** How do you navigate to a new screen in Flutter?
+- A. Navigator.go(context, NewScreen())
+- B. Navigator.push(context, MaterialPageRoute(builder: (context) => NewScreen()))
+- C. Router.navigate(NewScreen())
+- D. ScreenManager.show(NewScreen())
+
+**Correct Answer:** B  
+**Explanation:** Navigator.push() with MaterialPageRoute is the standard way to navigate to a new screen in Flutter.
+
+### Question 118 (Medium)
+**Question:** What animation moves a widget from one screen to another?
+- A. Tween animation
+- B. Hero animation
+- C. Slide animation
+- D. Fade animation
+
+**Correct Answer:** B  
+**Explanation:** Hero animation creates smooth transitions by flying a widget from one screen to another during navigation.
+
+### Question 119 (Hard)
+**Question:** How do you pass data back from a screen when popping?
+- A. Use global variables
+- B. Navigator.pop(context, data)
+- C. Return statement in build method
+- D. Use SharedPreferences
+
+**Correct Answer:** B  
+**Explanation:** Navigator.pop() can accept a second parameter to pass data back to the previous screen, which can be received using await on push.
+
+### Question 120 (Medium)
+**Question:** What widget is used to create forms with validation?
+- A. FormWidget
+- B. Form with TextFormField
+- C. InputForm
+- D. ValidatedForm
+
+**Correct Answer:** B  
+**Explanation:** The Form widget along with TextFormField provides built-in validation and form state management.
+
+---
+
+## Additional Questions: Working with Data (Questions 121-125)
+
+### Question 121 (Easy)
+**Question:** Which package is commonly used for making HTTP requests in Flutter?
+- A. axios
+- B. fetch
+- C. http or dio
+- D. request
+
+**Correct Answer:** C  
+**Explanation:** The 'http' package and 'dio' are the most commonly used packages for making HTTP requests in Flutter.
+
+### Question 122 (Medium)
+**Question:** What is the purpose of JSON serialization in Flutter?
+- A. Compressing JSON data
+- B. Converting JSON to Dart objects and vice versa
+- C. Encrypting JSON data
+- D. Validating JSON structure
+
+**Correct Answer:** B  
+**Explanation:** JSON serialization converts JSON data to Dart objects (deserialization) and Dart objects to JSON (serialization).
+
+### Question 123 (Medium)
+**Question:** Which package is used for storing simple key-value pairs locally?
+- A. LocalStorage
+- B. SharedPreferences
+- C. SecureStore
+- D. DataCache
+
+**Correct Answer:** B  
+**Explanation:** SharedPreferences provides persistent storage for simple data types like strings, integers, and booleans.
+
+### Question 124 (Hard)
+**Question:** In the Notes CRUD App, what does Firestore use for document identification?
+- A. Primary Key
+- B. UUID
+- C. Document ID (auto-generated or custom)
+- D. Index number
+
+**Correct Answer:** C  
+**Explanation:** Firestore uses Document IDs which can be auto-generated by Firestore or set manually when creating documents.
+
+### Question 125 (Medium)
+**Question:** Which widget is best for displaying a scrollable list of items?
+- A. Column with SingleChildScrollView
+- B. ListView.builder
+- C. GridView.count
+- D. Stack
+
+**Correct Answer:** B  
+**Explanation:** ListView.builder is optimized for large lists as it builds items lazily (only when they're visible on screen).
+
+---
+
+## Module 7: Clean Architecture (Questions 126-150)
+
+### Question 126 (Medium)
+**Question:** What are the three main layers in Clean Architecture?
+- A. UI, Business, Database
+- B. Presentation, Domain, Data
+- C. View, Controller, Model
+- D. Frontend, Backend, Storage
+
+**Correct Answer:** B  
+**Explanation:** Clean Architecture divides the app into Presentation (UI), Domain (business logic), and Data (data sources) layers.
+
+### Question 127 (Hard)
+**Question:** In Clean Architecture, where should business logic reside?
+- A. Presentation layer
+- B. Data layer
+- C. Domain layer (Use Cases)
+- D. Repository
+
+**Correct Answer:** C  
+**Explanation:** Business logic belongs in the Domain layer, specifically in Use Cases, keeping it independent of UI and data sources.
+
+### Question 128 (Hard)
+**Question:** What is the purpose of a Repository in Clean Architecture?
+- A. Store code in version control
+- B. Abstract data sources and provide a clean API to the domain layer
+- C. Manage UI state
+- D. Handle network requests
+
+**Correct Answer:** B  
+**Explanation:** Repository pattern abstracts data sources, allowing the domain layer to work with data without knowing where it comes from.
+
+### Question 129 (Hard)
+**Question:** In the Notes CRUD App, what is the role of NoteModel vs Note Entity?
+- A. They're the same thing
+- B. NoteModel is for JSON parsing (data layer), Note Entity is for business logic (domain layer)
+- C. NoteModel is deprecated
+- D. Note Entity is only for testing
+
+**Correct Answer:** B  
+**Explanation:** NoteModel handles JSON serialization in the data layer, while Note Entity represents the business object in the domain layer.
+
+### Question 130 (Hard)
+**Question:** What is dependency injection used for in Flutter?
+- A. Injecting CSS into widgets
+- B. Providing dependencies to classes without tight coupling
+- C. Adding animations
+- D. Database connections
+
+**Correct Answer:** B  
+**Explanation:** Dependency injection provides objects with their dependencies from external sources, promoting loose coupling and testability.
+
+### Question 131 (Hard)
+**Question:** In the Notes App, what package is used for dependency injection?
+- A. Provider
+- B. GetIt
+- C. Injectable
+- D. Kiwi
+
+**Correct Answer:** B  
+**Explanation:** GetIt is a service locator used in the Notes App for dependency injection, registered in injection_container.dart.
+
+### Question 132 (Medium)
+**Question:** What is the primary benefit of using Use Cases?
+- A. Faster execution
+- B. Encapsulating single business operations with clear responsibilities
+- C. Reducing code size
+- D. Improving UI performance
+
+**Correct Answer:** B  
+**Explanation:** Use Cases encapsulate specific business operations, making the code more maintainable, testable, and following Single Responsibility Principle.
+
+### Question 133 (Hard)
+**Question:** What does the Result pattern help with in the Notes App?
+- A. Improving performance
+- B. Handling success and failure states in a type-safe way
+- C. Caching data
+- D. Logging errors
+
+**Correct Answer:** B  
+**Explanation:** Result is a wrapper that handles success/failure states elegantly, making error handling more explicit and type-safe.
+
+### Question 134 (Hard)
+**Question:** Why should the Domain layer not depend on the Data layer?
+- A. It's faster this way
+- B. To follow the Dependency Inversion Principle - domain defines interfaces, data implements them
+- C. Domain layer is deprecated
+- D. It's a Flutter requirement
+
+**Correct Answer:** B  
+**Explanation:** Dependency Inversion Principle states that high-level modules (domain) shouldn't depend on low-level modules (data), both should depend on abstractions.
+
+### Question 135 (Medium)
+**Question:** What type of testing focuses on individual functions or classes?
+- A. Integration testing
+- B. Unit testing
+- C. Widget testing
+- D. End-to-end testing
+
+**Correct Answer:** B  
+**Explanation:** Unit testing tests individual functions, methods, or classes in isolation to verify they work correctly.
+
+---
+
+## Module 8: BLoC Pattern Specific (Questions 136-140)
+
+### Question 136 (Hard)
+**Question:** In BLoC pattern, what are the three main components?
+- A. Events, States, BLoC
+- B. Inputs, Outputs, Controller
+- C. Actions, Reducers, Store
+- D. Models, Views, Controllers
+
+**Correct Answer:** A  
+**Explanation:** BLoC pattern consists of Events (inputs), States (outputs), and the BLoC itself (business logic processor).
+
+### Question 137 (Hard)
+**Question:** What triggers a BLoC to process logic?
+- A. setState() call
+- B. Adding an Event
+- C. Changing state directly
+- D. Calling a method
+
+**Correct Answer:** B  
+**Explanation:** In BLoC pattern, you dispatch Events to the BLoC, which processes them and emits new States.
+
+### Question 138 (Hard)
+**Question:** What widget listens to BLoC state changes?
+- A. BlocProvider
+- B. BlocBuilder or BlocListener
+- C. BlocContainer
+- D. BlocWidget
+
+**Correct Answer:** B  
+**Explanation:** BlocBuilder rebuilds UI based on state changes, while BlocListener listens for state changes to perform actions.
+
+### Question 139 (Hard)
+**Question:** In the Notes App, what event would you dispatch to create a new note?
+- A. LoadNotes
+- B. CreateNote with note data
+- C. AddNoteEvent
+- D. SaveNote
+
+**Correct Answer:** B  
+**Explanation:** CreateNote event is dispatched with note data, which the BLoC processes to create a new note through the use case.
+
+### Question 140 (Medium)
+**Question:** What happens when a BLoC is processing an event?
+- A. The app freezes
+- B. It emits a Loading state
+- C. It throws an error
+- D. Nothing visible to the user
+
+**Correct Answer:** B  
+**Explanation:** BLoCs typically emit a Loading state while processing, allowing the UI to show loading indicators.
+
+---
+
+## Module 9: Practical Code Analysis (Questions 141-145)
+
+### Question 141 (Medium)
+**Question:** What does this code do? Navigator.pushReplacement(context, route)
+- A. Adds a new route to the stack
+- B. Replaces current route with new one (no back button)
+- C. Updates the current route
+- D. Removes all routes
+
+**Correct Answer:** B  
+**Explanation:** pushReplacement replaces the current route with a new one, preventing users from going back to the previous screen.
+
+### Question 142 (Hard)
+**Question:** What's the correct way to handle async operations in a BLoC?
+- A. Use async/await directly in the event handler
+- B. Use emit() inside async functions with try-catch for error handling
+- C. Use setState()
+- D. Use FutureBuilder in the BLoC
+
+**Correct Answer:** B  
+**Explanation:** BLoC event handlers use async/await with emit() to update states, wrapped in try-catch for proper error handling.
+
+### Question 143 (Medium)
+**Question:** What's wrong with this: final repo = NotesRepositoryImpl() in a widget?
+- A. Nothing, it's correct
+- B. Creates tight coupling, should use dependency injection instead
+- C. Wrong syntax
+- D. Should use const
+
+**Correct Answer:** B  
+**Explanation:** Creating dependencies directly creates tight coupling. Use dependency injection (GetIt) to provide the repository instance.
+
+### Question 144 (Hard)
+**Question:** Why use fromJson and toJson methods in models?
+- A. For encryption
+- B. For serializing Dart objects to/from JSON for API/database operations
+- C. For validation
+- D. For type checking
+
+**Correct Answer:** B  
+**Explanation:** These methods convert between JSON (from APIs/databases) and Dart objects, enabling data persistence and API communication.
+
+### Question 145 (Medium)
+**Question:** What's the purpose of json_serializable package?
+- A. Manual JSON parsing
+- B. Automatically generating toJson/fromJson code at build time
+- C. Validating JSON
+- D. Compressing JSON
+
+**Correct Answer:** B  
+**Explanation:** json_serializable generates boilerplate serialization code automatically using build_runner, reducing manual coding errors.
+
+---
+
+## Module 10: Architecture Flow & Best Practices (Questions 146-150)
+
+### Question 146 (Hard)
+**Question:** What's the correct data flow when creating a note in Clean Architecture?
+- A. UI → Repository → UseCase → DataSource
+- B. UI → BLoC → UseCase → Repository → DataSource → Firebase
+- C. UI → DataSource → Repository → UseCase
+- D. UI → Firebase → BLoC
+
+**Correct Answer:** B  
+**Explanation:** Proper flow: UI dispatches event → BLoC → UseCase → Repository (interface) → Repository Implementation → DataSource → Firebase.
+
+### Question 147 (Hard)
+**Question:** Why separate DataSource from Repository implementation?
+- A. To make code longer
+- B. DataSource handles raw data operations, Repository adds business logic and error handling
+- C. It's a Flutter requirement
+- D. For performance
+
+**Correct Answer:** B  
+**Explanation:** DataSource focuses on raw data operations (API calls, database queries), while Repository adds business logic, caching, and proper error handling.
+
+### Question 148 (Hard)
+**Question:** What principle is violated if a Use Case directly accesses a DataSource?
+- A. Single Responsibility Principle
+- B. Dependency Inversion Principle
+- C. Open/Closed Principle
+- D. Liskov Substitution Principle
+
+**Correct Answer:** B  
+**Explanation:** Use Cases should depend on Repository abstractions, not concrete implementations like DataSources (Dependency Inversion).
+
+### Question 149 (Medium)
+**Question:** What makes Clean Architecture code more testable?
+- A. Smaller file sizes
+- B. Loose coupling and dependency injection allow easy mocking
+- C. Faster execution
+- D. Better UI
+
+**Correct Answer:** B  
+**Explanation:** Loose coupling and dependency injection allow you to easily mock dependencies and test components in isolation.
+
+### Question 150 (Hard)
+**Question:** In the Notes App, where should you handle Firebase exceptions and convert them to Failures?
+- A. In the UI layer
+- B. In the BLoC
+- C. In the Repository implementation
+- D. In the Use Case
+
+**Correct Answer:** C  
+**Explanation:** Repository implementation catches exceptions from DataSource and converts them to domain-layer Failures for proper error handling.
+
