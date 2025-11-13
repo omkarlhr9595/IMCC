@@ -73,3 +73,9 @@ npm install express --save
 - **503 Service Unavailable** - The server is currently unable to handle the request
 - **504 Gateway Timeout** - The server, while acting as a gateway or proxy, did not receive a timely response
 - **505 HTTP Version Not Supported** - The server does not support the HTTP protocol version used in the request
+
+To install express package
+
+```bash
+ npm i mongoose  
+```
