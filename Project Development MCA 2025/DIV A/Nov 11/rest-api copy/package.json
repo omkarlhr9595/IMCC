@@ -1,0 +1,19 @@
+{
+  "name": "rest-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
