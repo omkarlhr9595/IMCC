@@ -6,7 +6,7 @@ const app = express();
 // app.use("api/posts", postRoutes);
 
 app.get("/", (req, res) => {
-  res.status(404).json({ message: "Hello World" });
+  res.status(504).json({ message: "Hello World" });
 });
 
 app.get("/greet/:name", (req, res) => {
