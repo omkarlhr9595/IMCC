@@ -1,19 +1,16 @@
 import app from "./app.js";
 import mongoose from "mongoose";
-import { config } from "./config/config.js";
 
-// Connect to MongoDB
-mongoose
-  .connect(config.mongoURI)
+mongoose.connect("mongodb+srv://root:root@cluster0.d0drjfy.mongodb.net/?appName=Cluster0")
   .then(() => {
     console.log("Connected to MongoDB");
   })
-  .catch((error) => {
-    console.error("Error connecting to MongoDB", error);
+  .catch((err) => {
+    console.log("Error connecting to MongoDB", err);
   });
 
 // Start server
-const PORT = config.port || 5000;
+const PORT = 3000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
