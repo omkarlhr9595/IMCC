@@ -41,19 +41,6 @@ export const verifyToken = (token) => {
 };
 
 /**
- * Decode a JWT token without verification (use with caution)
- * @param {string} token - The JWT token to decode
- * @returns {Object} Decoded token payload
- */
-export const decodeToken = (token) => {
-  try {
-    return jwt.decode(token);
-  } catch (error) {
-    throw new Error(`Error decoding token: ${error.message}`);
-  }
-};
-
-/**
  * Middleware to verify JWT token from Authorization header
  * @param {Object} req - Express request object
  * @param {Object} res - Express response object
@@ -81,6 +68,5 @@ export const authenticateToken = (req, res, next) => {
 export default {
   generateToken,
   verifyToken,
-  decodeToken,
   authenticateToken,
 };
