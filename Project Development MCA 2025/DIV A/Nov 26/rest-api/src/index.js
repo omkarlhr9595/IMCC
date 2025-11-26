@@ -1,7 +1,10 @@
 import app from "./app.js";
 import mongoose from "mongoose";
+import config from "./config/index.js";
 
-mongoose.connect("mongodb+srv://root:root@cluster0.d0drjfy.mongodb.net/?appName=Cluster0")
+// Connect to MongoDB
+mongoose
+  .connect(config.mongoUri)
   .then(() => {
     console.log("Connected to MongoDB");
   })
@@ -10,7 +13,7 @@ mongoose.connect("mongodb+srv://root:root@cluster0.d0drjfy.mongodb.net/?appName=
   });
 
 // Start server
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+app.listen(config.port, () => {
+  console.log(`Server is running on port ${config.port}`);
+  console.log(`Environment: ${config.nodeEnv}`);
 });

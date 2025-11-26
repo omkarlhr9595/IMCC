@@ -1,8 +1,5 @@
 import jwt from "jsonwebtoken";
-
-// JWT Secret - In production, use environment variables
-const JWT_SECRET = process.env.JWT_SECRET || "your-secret-key-change-this-in-production";
-const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "7d"; // Default: 7 days
+import config from "../config/index.js";
 
 /**
  * Generate a JWT token for a user
@@ -10,17 +7,13 @@ const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || "7d"; // Default: 7 days
  * @param {string} expiresIn - Token expiration time (e.g., '1h', '7d', '30d')
  * @returns {string} JWT token
  */
-export const generateToken = (payload, expiresIn = JWT_EXPIRES_IN) => {
+export const generateToken = (payload, expiresIn = config.jwtExpiresIn) => {
   try {
-    const token = jwt.sign(
-      payload,
-      JWT_SECRET,
-      {
-        expiresIn: expiresIn,
-        issuer: "rest-api", // Optional: identifies who issued the token
-        audience: "rest-api-users" // Optional: identifies who the token is intended for
-      }
-    );
+    const token = jwt.sign(payload, config.jwtSecret, {
+      expiresIn: expiresIn,
+      issuer: config.jwtIssuer,
+      audience: config.jwtAudience,
+    });
     return token;
   } catch (error) {
     throw new Error(`Error generating token: ${error.message}`);
@@ -34,7 +27,7 @@ export const generateToken = (payload, expiresIn = JWT_EXPIRES_IN) => {
  */
 export const verifyToken = (token) => {
   try {
-    const decoded = jwt.verify(token, JWT_SECRET);
+    const decoded = jwt.verify(token, config.jwtSecret);
     return decoded;
   } catch (error) {
     if (error.name === "TokenExpiredError") {
@@ -89,6 +82,5 @@ export default {
   generateToken,
   verifyToken,
   decodeToken,
-  authenticateToken
+  authenticateToken,
 };
-
