@@ -16,9 +16,7 @@ const config = {
   jwtAudience: process.env.JWT_AUDIENCE || "rest-api-users",
 
   // Database Configuration
-  mongoUri:
-    process.env.MONGO_URI ||
-    "mongodb+srv://root:root@cluster0.d0drjfy.mongodb.net/?appName=Cluster0",
+  mongoUri: process.env.MONGO_URI,
 
   // Validate required environment variables
   validate: () => {
