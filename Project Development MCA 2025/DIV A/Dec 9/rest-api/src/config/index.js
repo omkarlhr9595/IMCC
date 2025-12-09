@@ -5,15 +5,15 @@ dotenv.config();
 
 const config = {
   // Server Configuration
-  port: process.env.PORT || 3000,
-  nodeEnv: process.env.NODE_ENV || "development",
+  port: process.env.PORT,
+  nodeEnv: process.env.NODE_ENV,
 
   // JWT Configuration
   jwtSecret:
-    process.env.JWT_SECRET || "your-secret-key-change-this-in-production",
-  jwtExpiresIn: process.env.JWT_EXPIRES_IN || "7d",
-  jwtIssuer: process.env.JWT_ISSUER || "rest-api",
-  jwtAudience: process.env.JWT_AUDIENCE || "rest-api-users",
+    process.env.JWT_SECRET,
+  jwtExpiresIn: process.env.JWT_EXPIRES_IN,
+  jwtIssuer: process.env.JWT_ISSUER,
+  jwtAudience: process.env.JWT_AUDIENCE,
 
   // Database Configuration
   mongoUri: process.env.MONGO_URI,
