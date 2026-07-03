@@ -48,10 +48,10 @@ class _BirthdayScreenState extends State<BirthdayScreen> {
               children: [
                 // Lottie animation (foreground)
                 SizedBox(
-                  width: 200,
-                  height: 200,
+                  width: 400,
+                  height: 400,
                   child: Lottie.asset(
-                    'assets/lottie/success_lottie.json',
+                    'assets/lottie/birthday_lottie.json',
                     // Animation plays once and then stops
                     repeat: true,
                     reverse: false,
