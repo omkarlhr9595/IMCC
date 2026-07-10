@@ -1,7 +1,3 @@
-Here is a complete, ready-to-copy assignment prompt tailored for students. It breaks down the problem, specifies the constraints, defines clear requirements, and includes an evaluation rubric.
-
----
-
 # Computer Science Assignment: The Running Calculator
 
 ## Objective
