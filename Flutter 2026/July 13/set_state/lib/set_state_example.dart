@@ -72,7 +72,7 @@ class _SetStateExampleState extends State<SetStateExample> {
                 _result = val1 + val2; 
                 print('Updated inline (No UI change): $_result');
               },
-              child: const Text('1. Inline Addition Only'),
+              child: const Text('1. Addition Only'),
             ),
             const SizedBox(height: 12),
             
@@ -81,7 +81,7 @@ class _SetStateExampleState extends State<SetStateExample> {
               onPressed: () {
                 setState(() {}); // Inline empty state trigger
               },
-              child: const Text('2. Inline setState Only'),
+              child: const Text('2. setState Only'),
             ),
             const SizedBox(height: 12),
             
@@ -99,7 +99,7 @@ class _SetStateExampleState extends State<SetStateExample> {
                 backgroundColor: Colors.blue,
                 foregroundColor: Colors.white,
               ),
-              child: const Text('3. Inline Both (Add & Update)'),
+              child: const Text('3.Add & Update'),
             ),
           ],
         ),
