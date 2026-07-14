@@ -1,3 +1,4 @@
+import 'package:calculator/calculator/utils/calculator_expression_evaluator.dart';
 import 'package:calculator/calculator/widgets/backspace_button.dart';
 import 'package:calculator/calculator/widgets/calculator_button.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ class CalculatorScreen extends StatefulWidget {
 }
 
 class _CalculatorScreenState extends State<CalculatorScreen> {
+  final CalculatorExpressionEvaluator _evaluator = CalculatorExpressionEvaluator();
   String _display = '0';
   String _expression = '';
   bool _shouldResetDisplay = false;
@@ -74,8 +76,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     }
   }
 
-  
-
   String _getOperatorSymbol(String displayOperator) {
     switch (displayOperator) {
       case '÷':
@@ -96,7 +96,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   void _calculateResult() {
     try {
       _expression += _display;
-      final result = _evaluateExpression(_expression);
+      final result = _evaluator.evaluate(_expression);
       _display = _formatResult(result);
       _expression = '';
       _shouldResetDisplay = true;
@@ -105,147 +105,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       _expression = '';
       _shouldResetDisplay = true;
     }
-  }
-
-  double _evaluateExpression(String expression) {
-    // Simple evaluation: just parse the expression as a double
-    // This works for basic arithmetic without complex parsing
-    try {
-      // Handle percentage by replacing % with /100
-      expression = expression.replaceAll('%', '/100');
-      
-      // For simple expressions, we can use a basic approach
-      // Split by operators and evaluate step by step
-      return _simpleEvaluate(expression);
-    } catch (e) {
-      throw Exception('Invalid expression');
-    }
-  }
-
-  double _simpleEvaluate(String expression) {
-    // Remove spaces
-    expression = expression.replaceAll(' ', '');
-    
-    // Handle simple cases first
-    if (expression.contains('*') || expression.contains('/')) {
-      return _evaluateWithMultiplication(expression);
-    } else {
-      return _evaluateWithAddition(expression);
-    }
-  }
-
-  double _evaluateWithMultiplication(String expression) {
-    // Split by + and - to handle multiplication/division first
-    List<String> parts = [];
-    List<String> operators = [];
-    
-    String current = '';
-    for (int i = 0; i < expression.length; i++) {
-      String char = expression[i];
-      if (char == '+' || char == '-') {
-        if (current.isNotEmpty) {
-          parts.add(current);
-          current = '';
-        }
-        operators.add(char);
-      } else {
-        current += char;
-      }
-    }
-    if (current.isNotEmpty) {
-      parts.add(current);
-    }
-    
-    // Evaluate each part (which may contain * and /)
-    List<double> results = [];
-    for (String part in parts) {
-      results.add(_evaluateMultiplicationOnly(part));
-    }
-    
-    // Now combine with + and -
-    double result = results[0];
-    for (int i = 0; i < operators.length && i + 1 < results.length; i++) {
-      if (operators[i] == '+') {
-        result += results[i + 1];
-      } else {
-        result -= results[i + 1];
-      }
-    }
-    
-    return result;
-  }
-
-  double _evaluateMultiplicationOnly(String expression) {
-    List<String> parts = [];
-    List<String> operators = [];
-    
-    String current = '';
-    for (int i = 0; i < expression.length; i++) {
-      String char = expression[i];
-      if (char == '*' || char == '/') {
-        if (current.isNotEmpty) {
-          parts.add(current);
-          current = '';
-        }
-        operators.add(char);
-      } else {
-        current += char;
-      }
-    }
-    if (current.isNotEmpty) {
-      parts.add(current);
-    }
-    
-    if (parts.isEmpty) return 0;
-    
-    double result = double.parse(parts[0]);
-    for (int i = 0; i < operators.length && i + 1 < parts.length; i++) {
-      double next = double.parse(parts[i + 1]);
-      if (operators[i] == '*') {
-        result *= next;
-      } else if (operators[i] == '/') {
-        if (next == 0) throw Exception('Division by zero');
-        result /= next;
-      }
-    }
-    
-    return result;
-  }
-
-  double _evaluateWithAddition(String expression) {
-    List<String> parts = [];
-    List<String> operators = [];
-    
-    String current = '';
-    for (int i = 0; i < expression.length; i++) {
-      String char = expression[i];
-      if (char == '+' || char == '-') {
-        if (current.isNotEmpty) {
-          parts.add(current);
-          current = '';
-        }
-        operators.add(char);
-      } else {
-        current += char;
-      }
-    }
-    if (current.isNotEmpty) {
-      parts.add(current);
-    }
-    
-    if (parts.isEmpty) return 0;
-    
-    double result = double.parse(parts[0]);
-    for (int i = 0; i < operators.length && i + 1 < parts.length; i++) {
-      double next = double.parse(parts[i + 1]);
-      if (operators[i] == '+') {
-        result += next;
-      } else {
-        result -= next;
-      }
-    }
-    
-    return result;
   }
 
   String _formatResult(double result) {
@@ -281,7 +140,6 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final topPadding = MediaQuery.of(context).padding.top;
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
