@@ -188,136 +188,126 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
 
               // Calculator buttons
               Expanded(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    // Row 1
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    final spacing = 10.0;
+                    final availableWidth = constraints.maxWidth;
+                    final availableHeight = constraints.maxHeight;
+
+                    final buttonWidth = (availableWidth - (3 * spacing)) / 4;
+                    final buttonHeight = (availableHeight - (4 * spacing)) / 5;
+                    final aspectRatio = buttonWidth / buttonHeight;
+
+                    return GridView.count(
+                      crossAxisCount: 4,
+                      mainAxisSpacing: spacing,
+                      crossAxisSpacing: spacing,
+                      childAspectRatio: aspectRatio,
                       children: [
-                        CalculatorButton(
-                          text: 'AC',
-                          backgroundColor: Colors.purple[200]!,
-                          onPressed: () => _onButtonPressed('AC'),
-                        ),
-                                                CalculatorButton(
-                          text: 'CE', 
-                          backgroundColor: Colors.orange[200]!,
-                          onPressed: () => _onButtonPressed('CE'),
-                        ),
-                        CalculatorButton(
-                          text: '%',
-                          backgroundColor: Colors.blue[200]!,
-                          onPressed: () => _onButtonPressed('%'),
-                        ),
-                        CalculatorButton(
-                          text: '÷',
-                          backgroundColor: Colors.blue[200]!,
-                          onPressed: () => _onButtonPressed('÷'),
-                        ),
-                      ],
+                    // Row 1
+                    CalculatorButton(
+                      text: 'AC',
+                      backgroundColor: Colors.purple[200]!,
+                      onPressed: () => _onButtonPressed('AC'),
+                    ),
+                    CalculatorButton(
+                      text: 'CE',
+                      backgroundColor: Colors.orange[200]!,
+                      onPressed: () => _onButtonPressed('CE'),
+                    ),
+                    CalculatorButton(
+                      text: '%',
+                      backgroundColor: Colors.blue[200]!,
+                      onPressed: () => _onButtonPressed('%'),
+                    ),
+                    CalculatorButton(
+                      text: '÷',
+                      backgroundColor: Colors.blue[200]!,
+                      onPressed: () => _onButtonPressed('÷'),
                     ),
                     // Row 2
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        CalculatorButton(
-                          text: '7',
-                          backgroundColor: Colors.white,
-                          onPressed: () => _onButtonPressed('7'),
-                        ),
-                        CalculatorButton(
-                          text: '8',
-                          backgroundColor: Colors.white,
-                          onPressed: () => _onButtonPressed('8'),
-                        ),
-                        CalculatorButton(
-                          text: '9',
-                          backgroundColor: Colors.white,
-                          onPressed: () => _onButtonPressed('9'),
-                        ),
-                        CalculatorButton(
-                          text: '×',
-                          backgroundColor: Colors.blue[200]!,
-                          onPressed: () => _onButtonPressed('×'),
-                        ),
-                      ],
+                    CalculatorButton(
+                      text: '7',
+                      backgroundColor: Colors.white,
+                      onPressed: () => _onButtonPressed('7'),
+                    ),
+                    CalculatorButton(
+                      text: '8',
+                      backgroundColor: Colors.white,
+                      onPressed: () => _onButtonPressed('8'),
+                    ),
+                    CalculatorButton(
+                      text: '9',
+                      backgroundColor: Colors.white,
+                      onPressed: () => _onButtonPressed('9'),
+                    ),
+                    CalculatorButton(
+                      text: '×',
+                      backgroundColor: Colors.blue[200]!,
+                      onPressed: () => _onButtonPressed('×'),
                     ),
                     // Row 3
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        CalculatorButton(
-                          text: '4',
-                          backgroundColor: Colors.white,
-                          onPressed: () => _onButtonPressed('4'),
-                        ),
-                        CalculatorButton(
-                          text: '5',
-                          backgroundColor: Colors.white,
-                          onPressed: () => _onButtonPressed('5'),
-                        ),
-                        CalculatorButton(
-                          text: '6',
-                          backgroundColor: Colors.white,
-                          onPressed: () => _onButtonPressed('6'),
-                        ),
-                        CalculatorButton(
-                          text: '−',
-                          backgroundColor: Colors.blue[200]!,
-                          onPressed: () => _onButtonPressed('−'),
-                        ),
-                      ],
+                    CalculatorButton(
+                      text: '4',
+                      backgroundColor: Colors.white,
+                      onPressed: () => _onButtonPressed('4'),
+                    ),
+                    CalculatorButton(
+                      text: '5',
+                      backgroundColor: Colors.white,
+                      onPressed: () => _onButtonPressed('5'),
+                    ),
+                    CalculatorButton(
+                      text: '6',
+                      backgroundColor: Colors.white,
+                      onPressed: () => _onButtonPressed('6'),
+                    ),
+                    CalculatorButton(
+                      text: '−',
+                      backgroundColor: Colors.blue[200]!,
+                      onPressed: () => _onButtonPressed('−'),
                     ),
                     // Row 4
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        CalculatorButton(
-                          text: '1',
-                          backgroundColor: Colors.white,
-                          onPressed: () => _onButtonPressed('1'),
-                        ),
-                        CalculatorButton(
-                          text: '2',
-                          backgroundColor: Colors.white,
-                          onPressed: () => _onButtonPressed('2'),
-                        ),
-                        CalculatorButton(
-                          text: '3',
-                          backgroundColor: Colors.white,
-                          onPressed: () => _onButtonPressed('3'),
-                        ),
-                        CalculatorButton(
-                          text: '+',
-                          backgroundColor: Colors.blue[200]!,
-                          onPressed: () => _onButtonPressed('+'),
-                        ),
-                      ],
+                    CalculatorButton(
+                      text: '1',
+                      backgroundColor: Colors.white,
+                      onPressed: () => _onButtonPressed('1'),
+                    ),
+                    CalculatorButton(
+                      text: '2',
+                      backgroundColor: Colors.white,
+                      onPressed: () => _onButtonPressed('2'),
+                    ),
+                    CalculatorButton(
+                      text: '3',
+                      backgroundColor: Colors.white,
+                      onPressed: () => _onButtonPressed('3'),
+                    ),
+                    CalculatorButton(
+                      text: '+',
+                      backgroundColor: Colors.blue[200]!,
+                      onPressed: () => _onButtonPressed('+'),
                     ),
                     // Row 5
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        CalculatorButton(
-                          text: '0',
-                          backgroundColor: Colors.white,
-                          onPressed: () => _onButtonPressed('0'),
-                        ),
-                        CalculatorButton(
-                          text: '•',
-                          backgroundColor: Colors.white,
-                          onPressed: () => _onButtonPressed('•'),
-                        ),
-                        BackspaceButton(onPressed: _onBackspace),
-                        CalculatorButton(
-                          text: '=',
-                          backgroundColor: Colors.blue[200]!,
-                          onPressed: () => _onButtonPressed('='),
-                        ),
-                      ],
+                    CalculatorButton(
+                      text: '0',
+                      backgroundColor: Colors.white,
+                      onPressed: () => _onButtonPressed('0'),
                     ),
-                  ],
+                    CalculatorButton(
+                      text: '•',
+                      backgroundColor: Colors.white,
+                      onPressed: () => _onButtonPressed('•'),
+                    ),
+                    BackspaceButton(onPressed: _onBackspace),
+                    CalculatorButton(
+                      text: '=',
+                      backgroundColor: Colors.blue[200]!,
+                      onPressed: () => _onButtonPressed('='),
+                    ),
+                      ],
+                    );
+                  },
                 ),
               ),
             ],
