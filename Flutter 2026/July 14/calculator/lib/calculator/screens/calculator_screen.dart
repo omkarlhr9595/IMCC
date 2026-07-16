@@ -113,17 +113,17 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     } else {
       // Simple formatting: show up to 8 decimal places, then trim trailing zeros
       String formatted = result.toStringAsFixed(8);
-      
+
       // Remove trailing zeros
       while (formatted.endsWith('0') && formatted.contains('.')) {
         formatted = formatted.substring(0, formatted.length - 1);
       }
-      
+
       // Remove trailing decimal point
       if (formatted.endsWith('.')) {
         formatted = formatted.substring(0, formatted.length - 1);
       }
-      
+
       return formatted;
     }
   }
@@ -204,107 +204,107 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                       crossAxisSpacing: spacing,
                       childAspectRatio: aspectRatio,
                       children: [
-                    // Row 1
-                    CalculatorButton(
-                      text: 'AC',
-                      backgroundColor: Colors.purple[200]!,
-                      onPressed: () => _onButtonPressed('AC'),
-                    ),
-                    CalculatorButton(
-                      text: 'CE',
-                      backgroundColor: Colors.orange[200]!,
-                      onPressed: () => _onButtonPressed('CE'),
-                    ),
-                    CalculatorButton(
-                      text: '%',
-                      backgroundColor: Colors.blue[200]!,
-                      onPressed: () => _onButtonPressed('%'),
-                    ),
-                    CalculatorButton(
-                      text: '÷',
-                      backgroundColor: Colors.blue[200]!,
-                      onPressed: () => _onButtonPressed('÷'),
-                    ),
-                    // Row 2
-                    CalculatorButton(
-                      text: '7',
-                      backgroundColor: Colors.white,
-                      onPressed: () => _onButtonPressed('7'),
-                    ),
-                    CalculatorButton(
-                      text: '8',
-                      backgroundColor: Colors.white,
-                      onPressed: () => _onButtonPressed('8'),
-                    ),
-                    CalculatorButton(
-                      text: '9',
-                      backgroundColor: Colors.white,
-                      onPressed: () => _onButtonPressed('9'),
-                    ),
-                    CalculatorButton(
-                      text: '×',
-                      backgroundColor: Colors.blue[200]!,
-                      onPressed: () => _onButtonPressed('×'),
-                    ),
-                    // Row 3
-                    CalculatorButton(
-                      text: '4',
-                      backgroundColor: Colors.white,
-                      onPressed: () => _onButtonPressed('4'),
-                    ),
-                    CalculatorButton(
-                      text: '5',
-                      backgroundColor: Colors.white,
-                      onPressed: () => _onButtonPressed('5'),
-                    ),
-                    CalculatorButton(
-                      text: '6',
-                      backgroundColor: Colors.white,
-                      onPressed: () => _onButtonPressed('6'),
-                    ),
-                    CalculatorButton(
-                      text: '−',
-                      backgroundColor: Colors.blue[200]!,
-                      onPressed: () => _onButtonPressed('−'),
-                    ),
-                    // Row 4
-                    CalculatorButton(
-                      text: '1',
-                      backgroundColor: Colors.white,
-                      onPressed: () => _onButtonPressed('1'),
-                    ),
-                    CalculatorButton(
-                      text: '2',
-                      backgroundColor: Colors.white,
-                      onPressed: () => _onButtonPressed('2'),
-                    ),
-                    CalculatorButton(
-                      text: '3',
-                      backgroundColor: Colors.white,
-                      onPressed: () => _onButtonPressed('3'),
-                    ),
-                    CalculatorButton(
-                      text: '+',
-                      backgroundColor: Colors.blue[200]!,
-                      onPressed: () => _onButtonPressed('+'),
-                    ),
-                    // Row 5
-                    CalculatorButton(
-                      text: '0',
-                      backgroundColor: Colors.white,
-                      onPressed: () => _onButtonPressed('0'),
-                    ),
-                    CalculatorButton(
-                      text: '•',
-                      backgroundColor: Colors.white,
-                      onPressed: () => _onButtonPressed('•'),
-                    ),
-                    BackspaceButton(onPressed: _onBackspace),
-                    CalculatorButton(
-                      text: '=',
-                      backgroundColor: Colors.blue[200]!,
-                      onPressed: () => _onButtonPressed('='),
-                    ),
+                        // Row 1
+                        CalculatorButton(
+                          text: 'AC',
+                          backgroundColor: Colors.purple[200]!,
+                          onPressed: () => _onButtonPressed('AC'),
+                        ),
+                        CalculatorButton(
+                          text: 'CE',
+                          backgroundColor: Colors.orange[200]!,
+                          onPressed: () => _onButtonPressed('CE'),
+                        ),
+                        CalculatorButton(
+                          text: '%',
+                          backgroundColor: Colors.blue[200]!,
+                          onPressed: () => _onButtonPressed('%'),
+                        ),
+                        CalculatorButton(
+                          text: '÷',
+                          backgroundColor: Colors.blue[200]!,
+                          onPressed: () => _onButtonPressed('÷'),
+                        ),
+                        // Row 2
+                        CalculatorButton(
+                          text: '7',
+                          backgroundColor: Colors.white,
+                          onPressed: () => _onButtonPressed('7'),
+                        ),
+                        CalculatorButton(
+                          text: '8',
+                          backgroundColor: Colors.white,
+                          onPressed: () => _onButtonPressed('8'),
+                        ),
+                        CalculatorButton(
+                          text: '9',
+                          backgroundColor: Colors.white,
+                          onPressed: () => _onButtonPressed('9'),
+                        ),
+                        CalculatorButton(
+                          text: '×',
+                          backgroundColor: Colors.blue[200]!,
+                          onPressed: () => _onButtonPressed('×'),
+                        ),
+                        // Row 3
+                        CalculatorButton(
+                          text: '4',
+                          backgroundColor: Colors.white,
+                          onPressed: () => _onButtonPressed('4'),
+                        ),
+                        CalculatorButton(
+                          text: '5',
+                          backgroundColor: Colors.white,
+                          onPressed: () => _onButtonPressed('5'),
+                        ),
+                        CalculatorButton(
+                          text: '6',
+                          backgroundColor: Colors.white,
+                          onPressed: () => _onButtonPressed('6'),
+                        ),
+                        CalculatorButton(
+                          text: '−',
+                          backgroundColor: Colors.blue[200]!,
+                          onPressed: () => _onButtonPressed('−'),
+                        ),
+                        // Row 4
+                        CalculatorButton(
+                          text: '1',
+                          backgroundColor: Colors.white,
+                          onPressed: () => _onButtonPressed('1'),
+                        ),
+                        CalculatorButton(
+                          text: '2',
+                          backgroundColor: Colors.white,
+                          onPressed: () => _onButtonPressed('2'),
+                        ),
+                        CalculatorButton(
+                          text: '3',
+                          backgroundColor: Colors.white,
+                          onPressed: () => _onButtonPressed('3'),
+                        ),
+                        CalculatorButton(
+                          text: '+',
+                          backgroundColor: Colors.blue[200]!,
+                          onPressed: () => _onButtonPressed('+'),
+                        ),
+                        // Row 5
+                        CalculatorButton(
+                          text: '0',
+                          backgroundColor: Colors.white,
+                          onPressed: () => _onButtonPressed('0'),
+                        ),
+                        CalculatorButton(
+                          text: '•',
+                          backgroundColor: Colors.white,
+                          onPressed: () => _onButtonPressed('•'),
+                        ),
+                        BackspaceButton(onPressed: _onBackspace),
+                        CalculatorButton(
+                          text: '=',
+                          backgroundColor: Colors.blue[200]!,
+                          onPressed: () => _onButtonPressed('='),
+                        ),
                       ],
                     );
                   },
