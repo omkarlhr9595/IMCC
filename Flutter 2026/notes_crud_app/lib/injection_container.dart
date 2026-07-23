@@ -15,7 +15,7 @@ Future<void> init() async {
 
   // Data sources
   sl.registerLazySingleton<NotesDataSource>(
-    () => FirebaseNotesDataSource(),
+    () => SqliteNotesDataSource(),
   );
 
   // Repositories

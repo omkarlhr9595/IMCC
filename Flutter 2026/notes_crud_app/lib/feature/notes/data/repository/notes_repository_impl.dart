@@ -1,11 +1,11 @@
-import 'package:notes_crud_app/feature/notes/data/datasource/firebase_notes_datasource.dart';
+import 'package:notes_crud_app/feature/notes/data/datasource/sqlite_notes_datasource.dart';
 import 'package:notes_crud_app/feature/notes/data/models/note_model.dart';
 import 'package:notes_crud_app/feature/notes/domain/domain.dart';
 
 class NotesRepositoryImpl implements NotesRepository {
   final NotesDataSource _dataSource;
 
-  NotesRepositoryImpl({NotesDataSource? dataSource}) : _dataSource = dataSource ?? FirebaseNotesDataSource();
+  NotesRepositoryImpl({NotesDataSource? dataSource}) : _dataSource = dataSource ?? SqliteNotesDataSource();
 
   @override
   Future<List<Note>> getNotes() async {

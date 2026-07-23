@@ -1,5 +1,6 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:notes_crud_app/core/database/sqlite_database.dart';
 import 'package:notes_crud_app/feature/notes/data/models/note_model.dart';
+import 'package:sqflite/sqflite.dart';
 
 abstract class NotesDataSource {
   Future<List<NoteModel>> getNotes();
@@ -9,19 +10,19 @@ abstract class NotesDataSource {
   Future<void> deleteNote(String id);
 }
 
-class FirebaseNotesDataSource implements NotesDataSource {
-  final FirebaseFirestore _firestore;
-  final String _collectionName = 'notes';
-
-  FirebaseNotesDataSource({FirebaseFirestore? firestore}) : _firestore = firestore ?? FirebaseFirestore.instance;
+class SqliteNotesDataSource implements NotesDataSource {
+  static const String _tableName = 'notes';
 
   @override
   Future<List<NoteModel>> getNotes() async {
     try {
-      final querySnapshot = await _firestore.collection(_collectionName).orderBy('updatedAt', descending: true).get();
+      final db = await SqliteDatabase.instance;
+      final maps = await db.query(
+        _tableName,
+        orderBy: 'updatedAt DESC',
+      );
 
-      // Sort by pinned status in memory after fetching
-      final notes = querySnapshot.docs.map((doc) => NoteModel.fromFirestore(doc)).toList();
+      final notes = maps.map((map) => NoteModel.fromJson(map)).toList();
 
       // Sort: pinned first, then by updatedAt
       notes.sort((a, b) {
@@ -40,12 +41,18 @@ class FirebaseNotesDataSource implements NotesDataSource {
   @override
   Future<NoteModel?> getNoteById(String id) async {
     try {
-      final docSnapshot = await _firestore.collection(_collectionName).doc(id).get();
+      final db = await SqliteDatabase.instance;
+      final maps = await db.query(
+        _tableName,
+        where: 'id = ?',
+        whereArgs: [id],
+      );
 
-      if (docSnapshot.exists) {
-        return NoteModel.fromFirestore(docSnapshot);
+      if (maps.isEmpty) {
+        return null;
       }
-      return null;
+
+      return NoteModel.fromJson(maps.first);
     } catch (e) {
       throw Exception('Failed to fetch note: $e');
     }
@@ -54,8 +61,18 @@ class FirebaseNotesDataSource implements NotesDataSource {
   @override
   Future<String> createNote(NoteModel note) async {
     try {
-      final docRef = await _firestore.collection(_collectionName).add(note.toFirestore());
-      return docRef.id;
+      final db = await SqliteDatabase.instance;
+      final id = DateTime.now().millisecondsSinceEpoch.toString();
+
+      final noteToInsert = note.copyWith(id: id);
+
+      await db.insert(
+        _tableName,
+        noteToInsert.toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+
+      return id;
     } catch (e) {
       throw Exception('Failed to create note: $e');
     }
@@ -68,11 +85,17 @@ class FirebaseNotesDataSource implements NotesDataSource {
         throw Exception('Note ID is required for update');
       }
 
+      final db = await SqliteDatabase.instance;
       final updatedNote = note.copyWith(
         updatedAt: DateTime.now(),
       );
 
-      await _firestore.collection(_collectionName).doc(note.id).update(updatedNote.toFirestore());
+      await db.update(
+        _tableName,
+        updatedNote.toJson(),
+        where: 'id = ?',
+        whereArgs: [note.id],
+      );
     } catch (e) {
       throw Exception('Failed to update note: $e');
     }
@@ -81,19 +104,29 @@ class FirebaseNotesDataSource implements NotesDataSource {
   @override
   Future<void> deleteNote(String id) async {
     try {
-      await _firestore.collection(_collectionName).doc(id).delete();
+      final db = await SqliteDatabase.instance;
+      await db.delete(
+        _tableName,
+        where: 'id = ?',
+        whereArgs: [id],
+      );
     } catch (e) {
       throw Exception('Failed to delete note: $e');
     }
   }
 
-  // Additional methods for enhanced functionality
   Future<void> togglePin(String noteId, bool isPinned) async {
     try {
-      await _firestore.collection(_collectionName).doc(noteId).update({
-        'isPinned': isPinned,
-        'updatedAt': FieldValue.serverTimestamp(),
-      });
+      final db = await SqliteDatabase.instance;
+      await db.update(
+        _tableName,
+        {
+          'isPinned': isPinned ? 1 : 0,
+          'updatedAt': DateTime.now().toIso8601String(),
+        },
+        where: 'id = ?',
+        whereArgs: [noteId],
+      );
     } catch (e) {
       throw Exception('Failed to toggle pin: $e');
     }

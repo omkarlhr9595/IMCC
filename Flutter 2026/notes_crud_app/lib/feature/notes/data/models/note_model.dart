@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
@@ -24,11 +23,9 @@ class NoteModel extends Equatable {
     this.isPinned = false,
   });
 
-  // Factory method for creating a new note
   factory NoteModel.create({
     required String title,
     required String content,
-    List<String> tags = const [],
   }) {
     final now = DateTime.now();
     return NoteModel(
@@ -39,29 +36,25 @@ class NoteModel extends Equatable {
     );
   }
 
-  factory NoteModel.fromJson(Map<String, dynamic> json) => _$NoteModelFromJson(json);
-
-  Map<String, dynamic> toJson() => _$NoteModelToJson(this);
-
-  factory NoteModel.fromFirestore(DocumentSnapshot doc) {
-    final data = doc.data() as Map<String, dynamic>;
+  factory NoteModel.fromJson(Map<String, dynamic> json) {
     return NoteModel(
-      id: doc.id,
-      title: data['title'] ?? '',
-      content: data['content'] ?? '',
-      createdAt: (data['createdAt'] as Timestamp).toDate(),
-      updatedAt: (data['updatedAt'] as Timestamp).toDate(),
-      isPinned: data['isPinned'] ?? false,
+      id: json['id'] as String?,
+      title: json['title'] as String,
+      content: json['content'] as String,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      updatedAt: DateTime.parse(json['updatedAt'] as String),
+      isPinned: (json['isPinned'] as int?) == 1,
     );
   }
 
-  Map<String, dynamic> toFirestore() {
+  Map<String, dynamic> toJson() {
     return {
+      'id': id,
       'title': title,
       'content': content,
-      'createdAt': Timestamp.fromDate(createdAt),
-      'updatedAt': Timestamp.fromDate(updatedAt),
-      'isPinned': isPinned,
+      'createdAt': createdAt.toIso8601String(),
+      'updatedAt': updatedAt.toIso8601String(),
+      'isPinned': isPinned ? 1 : 0,
     };
   }
 
@@ -72,7 +65,6 @@ class NoteModel extends Equatable {
     DateTime? createdAt,
     DateTime? updatedAt,
     bool? isPinned,
-    List<String>? tags,
   }) {
     return NoteModel(
       id: id ?? this.id,
