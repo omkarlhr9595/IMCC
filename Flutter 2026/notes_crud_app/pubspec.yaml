@@ -1,0 +1,33 @@
+name: notes_crud_app
+description: "A new Flutter project."
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: '>=3.4.3 <4.0.0'
+
+dependencies:
+  bloc: ^9.0.0
+  cloud_firestore: ^6.0.0
+  dio: ^5.9.0
+  equatable: ^2.0.7
+  firebase_core: ^4.0.0
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^9.1.1
+  flutter_dotenv: ^6.0.0
+  get_it: ^8.2.0
+  google_fonts: ^6.3.0
+  json_annotation: ^4.9.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+  build_runner: ^2.4.11
+  json_serializable: ^6.8.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - .env
